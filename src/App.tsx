@@ -3,6 +3,6 @@
  */
 
 import {createAppContainer} from 'react-navigation';
-import Routes from './navigation';
+import AppNavigation from './navigation';
 
-export default createAppContainer(Routes);
+export default createAppContainer(AppNavigation);

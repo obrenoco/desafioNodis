@@ -2,7 +2,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from '../pages/Home';
 import DetailsScreen from '../pages/Details';
 
-const Routes = createStackNavigator(
+const AppNavigation = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
@@ -18,4 +18,4 @@ const Routes = createStackNavigator(
   },
 );
 
-export default Routes;
+export default AppNavigation;
