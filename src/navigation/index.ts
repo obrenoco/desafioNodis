@@ -6,7 +6,10 @@ const AppNavigation = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
-      navigationOptions: {title: 'Home'},
+
+      navigationOptions: {
+        title: 'Nodis',
+      },
     },
     Details: {
       screen: DetailsScreen,

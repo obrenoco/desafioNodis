@@ -1,15 +1,21 @@
 import React from 'react';
-
-import {Text} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+import Product from './components/Product';
 
 import {Container} from './styles';
 
-const Home: React.FC = () => {
-  return (
-    <Container>
-      <Text>Home</Text>
-    </Container>
-  );
-};
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <ScrollView>
+        <Container>
+          <ScrollView>
+            <Product />
+          </ScrollView>
+        </Container>
+      </ScrollView>
+    );
+  }
+}
 
-export default Home;
+export default HomeScreen;
