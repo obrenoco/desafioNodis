@@ -1,27 +1,30 @@
 import React from 'react';
-import {ActivityIndicator, Text} from 'react-native';
-import {Card, Button} from 'react-native-elements';
+import {ActivityIndicator} from 'react-native';
+import {Card} from 'react-native-elements';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Image, Price, Title} from './styles';
+import {Container, Image, Price, Title, Info} from './styles';
 
 class Product extends React.Component {
   render() {
     return (
       <TouchableOpacity>
         <Card>
-          <Image
-            source={{
-              uri:
-                'https://images-shoptime.b2w.io/produtos/01/00/sku/7134/2/7134233P.jpg',
-            }}
-            PlaceholderContent={<ActivityIndicator />}
-          />
-          <Card.Divider />
-          <Title>Livro</Title>
-          <Price>
-            <Text>R$</Text>
-            <Text>200</Text>
-          </Price>
+          <Container>
+            <Image
+              source={{
+                uri:
+                  'https://images-submarino.b2w.io/produtos/01/00/sku/34869/5/34869530P1.jpg',
+              }}
+              PlaceholderContent={<ActivityIndicator />}
+              resizeMode="cover"
+            />
+            <Info>
+              <Title style={{fontFamily: 'Rubik-Bold', fontWeight: 'normal'}}>
+                Óculos Shimano AeroLite
+              </Title>
+              <Price>R$ 419,00</Price>
+            </Info>
+          </Container>
         </Card>
       </TouchableOpacity>
     );

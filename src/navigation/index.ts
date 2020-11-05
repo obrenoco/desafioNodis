@@ -6,14 +6,16 @@ const AppNavigation = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
-
       navigationOptions: {
         title: 'Nodis',
+        headerTitleAlign: 'center',
       },
     },
     Details: {
       screen: DetailsScreen,
-      navigationOptions: {title: 'Details'},
+      navigationOptions: {
+        title: 'Details',
+      },
     },
   },
   {

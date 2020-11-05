@@ -11,6 +11,15 @@ class HomeScreen extends React.Component {
         <Container>
           <ScrollView>
             <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
+            <Product />
           </ScrollView>
         </Container>
       </ScrollView>
