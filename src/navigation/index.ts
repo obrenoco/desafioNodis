@@ -15,11 +15,12 @@ const AppNavigation = createStackNavigator(
       screen: DetailsScreen,
       navigationOptions: {
         title: 'Details',
+        headerShown: false,
       },
     },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Details',
   },
 );
 
