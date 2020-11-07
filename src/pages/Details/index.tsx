@@ -1,7 +1,8 @@
 import React from 'react';
-import {TextInput} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
+import Icon from 'react-native-vector-icons/Feather';
+import Arrow from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
@@ -10,21 +11,20 @@ import {
   ProductTitle,
   Stock,
   StockTitle,
-  Category,
   Divider,
-  Description,
   Price,
   BuyButton,
   CartButton,
   ButtonText,
+  ProductInfos,
+  ProductInfoText,
+  // Description,
 } from './styles';
 
 const MIN_HEIGHT = 0;
 const MAX_HEIGHT = 350;
 
 const Details: React.FC = () => {
-  const [value, onChangeText] = React.useState('1');
-
   return (
     <Container>
       <HeaderImageScrollView
@@ -51,11 +51,11 @@ const Details: React.FC = () => {
               type="plus-minus"
               onChange={(value) => console.log(value)}
               minValue={0}
-              maxValue={999}
+              maxValue={3}
               rounded
               rightButtonBackgroundColor="#00b97a"
               leftButtonBackgroundColor="#00b97a"
-              iconStyle={{color: 'white'}}
+              iconStyle={{color: '#fff'}}
             />
           </Stock>
 
@@ -69,9 +69,35 @@ const Details: React.FC = () => {
 
           <Divider />
 
-          <Category>Brinquedo</Category>
+          <ProductInfos activeOpacity={0.7}>
+            <Icon name="file-text" size={24} />
+            <ProductInfoText>Informações do produto</ProductInfoText>
+            <Arrow
+              name="arrow-forward-ios"
+              size={16}
+              style={{marginLeft: 'auto'}}
+            />
+          </ProductInfos>
+          <ProductInfos activeOpacity={0.7}>
+            <Icon name="percent" size={24} />
+            <ProductInfoText>Preço e promoções</ProductInfoText>
+            <Arrow
+              name="arrow-forward-ios"
+              size={16}
+              style={{marginLeft: 'auto'}}
+            />
+          </ProductInfos>
+          <ProductInfos activeOpacity={0.7}>
+            <Icon name="box" size={24} />
+            <ProductInfoText>Dimensões do produto</ProductInfoText>
+            <Arrow
+              name="arrow-forward-ios"
+              size={16}
+              style={{marginLeft: 'auto'}}
+            />
+          </ProductInfos>
 
-          <Description>
+          {/* <Description>
             A melhor forma de otimizar o aproveitamento da capacidade de um
             computador é compreender os princípios básicos do seu funcionamento.
             A obra, em sua segunda edição, revista e atualizada, descreve as
@@ -89,7 +115,7 @@ const Details: React.FC = () => {
             verificados em processadores comerciais. Materiais suplementares,
             entre os quais, guias de laboratório, simulador, slides com animação
             e exercícios resolvidos, encontram-se disponíveis no site.
-          </Description>
+          </Description> */}
         </Wrapper>
       </HeaderImageScrollView>
     </Container>

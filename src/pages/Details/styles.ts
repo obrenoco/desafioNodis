@@ -70,6 +70,20 @@ export const Divider = styled.View`
   opacity: 0.2;
 `;
 
+export const ProductInfos = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  padding: 25px 2px;
+  border-bottom-width: 0.5px;
+  border-bottom-color: grey;
+`;
+
+export const ProductInfoText = styled.Text`
+  font-family: 'Rubik-Medium';
+  font-size: 16px;
+  margin-left: 12px;
+`;
+
 export const Description = styled.Text`
   margin: 20px 0;
   line-height: 24px;
