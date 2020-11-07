@@ -1,6 +1,7 @@
 import React from 'react';
 import {TextInput} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
+import NumericInput from 'react-native-numeric-input';
 
 import {
   Container,
@@ -46,18 +47,15 @@ const Details: React.FC = () => {
 
           <Stock>
             <StockTitle>Estoque disponível</StockTitle>
-            <TextInput
-              style={{
-                width: 70,
-                height: 40,
-                borderColor: 'gray',
-                borderWidth: 1,
-                textAlign: 'center',
-                marginTop: 10,
-              }}
-              onChangeText={(text) => onChangeText(text)}
-              keyboardType="numeric"
-              value={value}
+            <NumericInput
+              type="plus-minus"
+              onChange={(value) => console.log(value)}
+              minValue={0}
+              maxValue={999}
+              rounded
+              rightButtonBackgroundColor="#00b97a"
+              leftButtonBackgroundColor="#00b97a"
+              iconStyle={{color: 'white'}}
             />
           </Stock>
 

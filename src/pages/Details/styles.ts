@@ -5,7 +5,8 @@ export const Container = styled.View`
 `;
 
 export const Wrapper = styled.View`
-  margin: 15px;
+  padding: 15px;
+  border-radius: 10px;
 `;
 
 export const Image = styled.Image`
@@ -20,11 +21,12 @@ export const ProductTitle = styled.Text`
 `;
 
 export const Stock = styled.View`
-  margin: 30px 0 10px;
+  margin: 30px 0;
 `;
 
 export const StockTitle = styled.Text`
   font-family: 'Rubik-Medium';
+  margin-bottom: 10px;
 `;
 
 export const Category = styled.Text``;
