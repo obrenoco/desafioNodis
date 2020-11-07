@@ -1,4 +1,5 @@
 import React from 'react';
+import {Alert} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
 import Icon from 'react-native-vector-icons/Feather';
@@ -25,6 +26,22 @@ const MIN_HEIGHT = 0;
 const MAX_HEIGHT = 350;
 
 const Details: React.FC = () => {
+  const createCartButtonAlert = () =>
+    Alert.alert(
+      'Adicionado ao carrinho',
+      'Seu produto foi adicionado ao carrinho !',
+      [{text: 'OK'}],
+      {cancelable: false},
+    );
+
+  const createBuyButtonAlert = () =>
+    Alert.alert(
+      'Compra efetuada',
+      'Sua compra foi efetuada com sucesso !',
+      [{text: 'OK'}],
+      {cancelable: false},
+    );
+
   return (
     <Container>
       <HeaderImageScrollView
@@ -59,11 +76,11 @@ const Details: React.FC = () => {
             />
           </Stock>
 
-          <BuyButton activeOpacity={0.7}>
+          <BuyButton activeOpacity={0.7} onPress={createBuyButtonAlert}>
             <ButtonText>Comprar</ButtonText>
           </BuyButton>
 
-          <CartButton activeOpacity={0.7}>
+          <CartButton activeOpacity={0.7} onPress={createCartButtonAlert}>
             <ButtonText>Adicionar ao carrinho</ButtonText>
           </CartButton>
 
