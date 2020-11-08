@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert} from 'react-native';
+import {Alert, View} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
 import Icon from 'react-native-vector-icons/Feather';
@@ -76,43 +76,47 @@ export default function Details() {
             />
           </Stock>
 
-          <BuyButton activeOpacity={0.7} onPress={createBuyButtonAlert}>
-            <ButtonText>Comprar</ButtonText>
-          </BuyButton>
+          <View>
+            <BuyButton activeOpacity={0.7} onPress={createBuyButtonAlert}>
+              <ButtonText>Comprar</ButtonText>
+            </BuyButton>
 
-          <CartButton activeOpacity={0.7} onPress={createCartButtonAlert}>
-            <ButtonText>Adicionar ao carrinho</ButtonText>
-          </CartButton>
+            <CartButton activeOpacity={0.7} onPress={createCartButtonAlert}>
+              <ButtonText>Adicionar ao carrinho</ButtonText>
+            </CartButton>
+          </View>
 
           <Divider />
 
-          <ProductInfos activeOpacity={0.7}>
-            <Icon name="file-text" size={24} />
-            <ProductInfoText>Informações do produto</ProductInfoText>
-            <Arrow
-              name="arrow-forward-ios"
-              size={16}
-              style={{marginLeft: 'auto'}}
-            />
-          </ProductInfos>
-          <ProductInfos activeOpacity={0.7}>
-            <Icon name="percent" size={24} />
-            <ProductInfoText>Preço e promoções</ProductInfoText>
-            <Arrow
-              name="arrow-forward-ios"
-              size={16}
-              style={{marginLeft: 'auto'}}
-            />
-          </ProductInfos>
-          <ProductInfos activeOpacity={0.7}>
-            <Icon name="box" size={24} />
-            <ProductInfoText>Dimensões do produto</ProductInfoText>
-            <Arrow
-              name="arrow-forward-ios"
-              size={16}
-              style={{marginLeft: 'auto'}}
-            />
-          </ProductInfos>
+          <View>
+            <ProductInfos activeOpacity={0.7}>
+              <Icon name="file-text" size={24} />
+              <ProductInfoText>Informações do produto</ProductInfoText>
+              <Arrow
+                name="arrow-forward-ios"
+                size={16}
+                style={{marginLeft: 'auto'}}
+              />
+            </ProductInfos>
+            <ProductInfos activeOpacity={0.7}>
+              <Icon name="percent" size={24} />
+              <ProductInfoText>Preço e promoções</ProductInfoText>
+              <Arrow
+                name="arrow-forward-ios"
+                size={16}
+                style={{marginLeft: 'auto'}}
+              />
+            </ProductInfos>
+            <ProductInfos activeOpacity={0.7}>
+              <Icon name="box" size={24} />
+              <ProductInfoText>Dimensões do produto</ProductInfoText>
+              <Arrow
+                name="arrow-forward-ios"
+                size={16}
+                style={{marginLeft: 'auto'}}
+              />
+            </ProductInfos>
+          </View>
 
           {/* <Description>
             A melhor forma de otimizar o aproveitamento da capacidade de um
