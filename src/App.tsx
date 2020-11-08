@@ -2,7 +2,24 @@
  * @format
  */
 
-import {createAppContainer} from 'react-navigation';
-import AppNavigation from './navigation';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-export default createAppContainer(AppNavigation);
+import HomeScreen from './pages/Home';
+import DetailsScreen from './pages/Details';
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;

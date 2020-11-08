@@ -25,7 +25,7 @@ import {
 const MIN_HEIGHT = 0;
 const MAX_HEIGHT = 350;
 
-const Details: React.FC = () => {
+export default function Details() {
   const createCartButtonAlert = () =>
     Alert.alert(
       'Adicionado ao carrinho',
@@ -137,6 +137,4 @@ const Details: React.FC = () => {
       </HeaderImageScrollView>
     </Container>
   );
-};
-
-export default Details;
+}
