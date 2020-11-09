@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {Alert, Switch, View} from 'react-native';
+import {Switch, View} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
 import Icon from 'react-native-vector-icons/Feather';
 import Arrow from 'react-native-vector-icons/MaterialIcons';
+import BuyButtons from './components/BuyButtons';
 
 import {
   Container,
@@ -12,11 +13,7 @@ import {
   ProductTitle,
   Stock,
   StockTitle,
-  Divider,
   Price,
-  BuyButton,
-  CartButton,
-  ButtonText,
   InfoContainer,
   InfoTitle,
   InfoTitleText,
@@ -33,22 +30,6 @@ const MIN_HEIGHT = 0;
 const MAX_HEIGHT = 350;
 
 export default function Details() {
-  const createCartButtonAlert = () =>
-    Alert.alert(
-      'Adicionado ao carrinho',
-      'Seu produto foi adicionado ao carrinho !',
-      [{text: 'OK'}],
-      {cancelable: false},
-    );
-
-  const createBuyButtonAlert = () =>
-    Alert.alert(
-      'Compra efetuada',
-      'Sua compra foi efetuada com sucesso !',
-      [{text: 'OK'}],
-      {cancelable: false},
-    );
-
   const [isInfoEditable, setIsInfoEditable] = useState(false);
   const [isDimensionEditable, setIsDimensionEditable] = useState(false);
   const [isPriceEditable, setIsPriceEditable] = useState(false);
@@ -96,17 +77,7 @@ export default function Details() {
             />
           </Stock>
 
-          <View>
-            <BuyButton activeOpacity={0.7} onPress={createBuyButtonAlert}>
-              <ButtonText>Comprar</ButtonText>
-            </BuyButton>
-
-            <CartButton activeOpacity={0.7} onPress={createCartButtonAlert}>
-              <ButtonText>Adicionar ao carrinho</ButtonText>
-            </CartButton>
-          </View>
-
-          <Divider />
+          <BuyButtons />
 
           <View>
             <InfoContainer>
