@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {Alert, Switch, View} from 'react-native';
+import {Switch, View} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
-import Icon from 'react-native-vector-icons/Feather';
-import Arrow from 'react-native-vector-icons/MaterialIcons';
+
+import BuyButtons from './components/BuyButtons';
+import InfoTitle from './components/InfoTitle';
 
 import {
   Container,
@@ -12,14 +13,8 @@ import {
   ProductTitle,
   Stock,
   StockTitle,
-  Divider,
   Price,
-  BuyButton,
-  CartButton,
-  ButtonText,
   InfoContainer,
-  InfoTitle,
-  InfoTitleText,
   InfoDescription,
   Item,
   ItemTitle,
@@ -33,22 +28,6 @@ const MIN_HEIGHT = 0;
 const MAX_HEIGHT = 350;
 
 export default function Details() {
-  const createCartButtonAlert = () =>
-    Alert.alert(
-      'Adicionado ao carrinho',
-      'Seu produto foi adicionado ao carrinho !',
-      [{text: 'OK'}],
-      {cancelable: false},
-    );
-
-  const createBuyButtonAlert = () =>
-    Alert.alert(
-      'Compra efetuada',
-      'Sua compra foi efetuada com sucesso !',
-      [{text: 'OK'}],
-      {cancelable: false},
-    );
-
   const [isInfoEditable, setIsInfoEditable] = useState(false);
   const [isDimensionEditable, setIsDimensionEditable] = useState(false);
   const [isPriceEditable, setIsPriceEditable] = useState(false);
@@ -86,7 +65,7 @@ export default function Details() {
             <StockTitle>Estoque disponível</StockTitle>
             <NumericInput
               type="plus-minus"
-              onChange={(value) => console.log(value)}
+              onChange={() => {}}
               minValue={0}
               maxValue={3}
               rounded
@@ -96,29 +75,14 @@ export default function Details() {
             />
           </Stock>
 
-          <View>
-            <BuyButton activeOpacity={0.7} onPress={createBuyButtonAlert}>
-              <ButtonText>Comprar</ButtonText>
-            </BuyButton>
-
-            <CartButton activeOpacity={0.7} onPress={createCartButtonAlert}>
-              <ButtonText>Adicionar ao carrinho</ButtonText>
-            </CartButton>
-          </View>
-
-          <Divider />
+          <BuyButtons />
 
           <View>
             <InfoContainer>
-              <InfoTitle>
-                <Icon name="file-text" size={24} />
-                <InfoTitleText>Informações do produto</InfoTitleText>
-                <Arrow
-                  name="keyboard-arrow-down"
-                  size={16}
-                  style={{marginLeft: 'auto'}}
-                />
-              </InfoTitle>
+              <InfoTitle
+                icon="file-text"
+                description="Informações do produto"
+              />
 
               <InfoEdit>
                 <InfoEditText>Editar</InfoEditText>
@@ -157,15 +121,7 @@ export default function Details() {
             </InfoContainer>
 
             <InfoContainer>
-              <InfoTitle>
-                <Icon name="percent" size={24} />
-                <InfoTitleText>Preço e promoções</InfoTitleText>
-                <Arrow
-                  name="keyboard-arrow-down"
-                  size={16}
-                  style={{marginLeft: 'auto'}}
-                />
-              </InfoTitle>
+              <InfoTitle icon="percent" description="Preço e promoções" />
 
               <InfoEdit>
                 <InfoEditText>Editar</InfoEditText>
@@ -202,15 +158,7 @@ export default function Details() {
             </InfoContainer>
 
             <InfoContainer>
-              <InfoTitle>
-                <Icon name="box" size={24} />
-                <InfoTitleText>Dimensões do produto</InfoTitleText>
-                <Arrow
-                  name="keyboard-arrow-down"
-                  size={16}
-                  style={{marginLeft: 'auto'}}
-                />
-              </InfoTitle>
+              <InfoTitle icon="box" description="Dimensões do produto" />
               <InfoEdit>
                 <InfoEditText>Editar</InfoEditText>
                 <Switch
