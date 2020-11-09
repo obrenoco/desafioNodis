@@ -54,7 +54,7 @@ const ProductList: DataProps | any = () => {
         <Container>
           <Image
             source={{
-              uri: `'${imageUrl}'`,
+              uri: `${imageUrl}`,
             }}
             PlaceholderContent={<ActivityIndicator />}
             resizeMode="cover"
