@@ -204,7 +204,7 @@ export default function Details({
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
                   {dimensions.weight}
                 </ItemDescription>
-                <ItemUnity>kg</ItemUnity>
+                <ItemUnity>g</ItemUnity>
               </Item>
             </InfoContainer>
           </View>
