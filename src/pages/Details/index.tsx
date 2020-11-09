@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {Switch, View} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
-import Icon from 'react-native-vector-icons/Feather';
-import Arrow from 'react-native-vector-icons/MaterialIcons';
+
 import BuyButtons from './components/BuyButtons';
+import InfoTitle from './components/InfoTitle';
 
 import {
   Container,
@@ -15,8 +15,6 @@ import {
   StockTitle,
   Price,
   InfoContainer,
-  InfoTitle,
-  InfoTitleText,
   InfoDescription,
   Item,
   ItemTitle,
@@ -81,15 +79,10 @@ export default function Details() {
 
           <View>
             <InfoContainer>
-              <InfoTitle>
-                <Icon name="file-text" size={24} />
-                <InfoTitleText>Informações do produto</InfoTitleText>
-                <Arrow
-                  name="keyboard-arrow-down"
-                  size={16}
-                  style={{marginLeft: 'auto'}}
-                />
-              </InfoTitle>
+              <InfoTitle
+                icon="file-text"
+                description="Informações do produto"
+              />
 
               <InfoEdit>
                 <InfoEditText>Editar</InfoEditText>
@@ -128,15 +121,7 @@ export default function Details() {
             </InfoContainer>
 
             <InfoContainer>
-              <InfoTitle>
-                <Icon name="percent" size={24} />
-                <InfoTitleText>Preço e promoções</InfoTitleText>
-                <Arrow
-                  name="keyboard-arrow-down"
-                  size={16}
-                  style={{marginLeft: 'auto'}}
-                />
-              </InfoTitle>
+              <InfoTitle icon="percent" description="Preço e promoções" />
 
               <InfoEdit>
                 <InfoEditText>Editar</InfoEditText>
@@ -173,15 +158,7 @@ export default function Details() {
             </InfoContainer>
 
             <InfoContainer>
-              <InfoTitle>
-                <Icon name="box" size={24} />
-                <InfoTitleText>Dimensões do produto</InfoTitleText>
-                <Arrow
-                  name="keyboard-arrow-down"
-                  size={16}
-                  style={{marginLeft: 'auto'}}
-                />
-              </InfoTitle>
+              <InfoTitle icon="box" description="Dimensões do produto" />
               <InfoEdit>
                 <InfoEditText>Editar</InfoEditText>
                 <Switch

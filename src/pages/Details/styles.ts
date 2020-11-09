@@ -42,20 +42,6 @@ export const InfoContainer = styled.View`
   padding: 1px;
 `;
 
-export const InfoTitle = styled.View`
-  flex-direction: row;
-  align-items: center;
-  padding: 25px 2px;
-  border-bottom-width: 0.5px;
-  border-bottom-color: grey;
-`;
-
-export const InfoTitleText = styled.Text`
-  font-family: 'Rubik-Medium';
-  font-size: 16px;
-  margin-left: 12px;
-`;
-
 export const InfoDescription = styled.TextInput`
   line-height: 24px;
   font-family: 'Rubik-Light';
