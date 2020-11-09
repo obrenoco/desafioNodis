@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Text} from 'react-native';
 import {Card} from 'react-native-elements';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
+import {gql, useQuery} from '@apollo/client';
 
 import {
   Wrapper,
@@ -15,53 +15,68 @@ import {
   Price,
 } from './styles';
 
-function HomeScreen() {
+interface DataProps {
+  id: number;
+  name: string;
+  salePrice: string;
+  imageUrl: string;
+}
+
+const API_DATA = gql`
+  query GetRates {
+    allSkus {
+      id
+      name
+      salePrice
+      imageUrl
+    }
+  }
+`;
+
+const ProductList: DataProps | any = () => {
   const navigation = useNavigation();
-  const client = new ApolloClient({
-    uri: 'http://10.0.2.2:3000',
-    cache: new InMemoryCache(),
-  });
+  const {loading, error, data} = useQuery(API_DATA);
 
-  client
-    .query({
-      query: gql`
-        query GetRates {
-          allSkus {
-            id
-            name
-            salePrice
-          }
-        }
-      `,
-    })
-    .then((result) => console.log(result.data));
+  if (loading) {
+    return (
+      <ActivityIndicator
+        style={{justifyContent: 'center', alignItems: 'center'}}
+      />
+    );
+  }
+  if (error) {
+    return <Text>Error :(</Text>;
+  }
+  return data.allSkus.map(({id, name, salePrice, imageUrl}: DataProps) => (
+    <TouchableOpacity onPress={() => navigation.navigate('Details')} key={id}>
+      <Card>
+        <Container>
+          <Image
+            source={{
+              uri: `'${imageUrl}'`,
+            }}
+            PlaceholderContent={<ActivityIndicator />}
+            resizeMode="cover"
+          />
+          <Info>
+            <CardTitle
+              style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
+              {name}
+            </CardTitle>
+            <Price>R$ {salePrice}</Price>
+          </Info>
+        </Container>
+      </Card>
+    </TouchableOpacity>
+  ));
+};
 
+function HomeScreen() {
   return (
     <ScrollView>
       <Wrapper>
         <Title>Products (10)</Title>
-
-        <TouchableOpacity onPress={() => navigation.navigate('Details')}>
-          <Card>
-            <Container>
-              <Image
-                source={{
-                  uri:
-                    'https://images-submarino.b2w.io/produtos/01/00/sku/34869/5/34869530P1.jpg',
-                }}
-                PlaceholderContent={<ActivityIndicator />}
-                resizeMode="cover"
-              />
-              <Info>
-                <CardTitle
-                  style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
-                  Óculos Shimano AeroLite
-                </CardTitle>
-                <Price>R$ 419,00</Price>
-              </Info>
-            </Container>
-          </Card>
-        </TouchableOpacity>
+        <ProductList />
       </Wrapper>
     </ScrollView>
   );
