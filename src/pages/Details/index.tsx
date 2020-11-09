@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Switch, View} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
+import {RoutesDataProps} from '../../@types/dataProps';
 import formatPrice from '../../utils/formatPrice';
 
 import BuyButtons from './components/BuyButtons';
@@ -28,16 +29,19 @@ import {
 const MIN_HEIGHT = 0;
 const MAX_HEIGHT = 350;
 
-export default function Details({route}: any) {
-  const {
-    name,
-    salePrice,
-    description,
-    imageUrl,
-    promotionalPrice,
-    stock,
-  } = route.params;
-
+export default function Details({
+  route: {
+    params: {
+      name,
+      salePrice,
+      description,
+      imageUrl,
+      promotionalPrice,
+      stock,
+      dimensions,
+    },
+  },
+}: RoutesDataProps) {
   const [isInfoEditable, setIsInfoEditable] = useState(false);
   const [isDimensionEditable, setIsDimensionEditable] = useState(false);
   const [isPriceEditable, setIsPriceEditable] = useState(false);
@@ -168,7 +172,7 @@ export default function Details({route}: any) {
                     opacity: 1,
                     textAlign: 'right',
                   }}>
-                  130
+                  {dimensions.height}
                 </ItemDescription>
                 <ItemUnity>cm</ItemUnity>
               </Item>
@@ -178,7 +182,7 @@ export default function Details({route}: any) {
                   editable={isDimensionEditable}
                   keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  130
+                  {dimensions.width}
                 </ItemDescription>
                 <ItemUnity>cm</ItemUnity>
               </Item>
@@ -188,7 +192,7 @@ export default function Details({route}: any) {
                   editable={isDimensionEditable}
                   keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  130
+                  {dimensions.depth}
                 </ItemDescription>
                 <ItemUnity>cm</ItemUnity>
               </Item>
@@ -198,7 +202,7 @@ export default function Details({route}: any) {
                   editable={isDimensionEditable}
                   keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  1
+                  {dimensions.weight}
                 </ItemDescription>
                 <ItemUnity>kg</ItemUnity>
               </Item>

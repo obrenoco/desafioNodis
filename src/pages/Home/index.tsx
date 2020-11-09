@@ -16,16 +16,7 @@ import {
   Image,
   Price,
 } from './styles';
-
-interface DataProps {
-  id: number;
-  name: string;
-  salePrice: number;
-  promotionalPrice: number;
-  imageUrl: string;
-  description: string;
-  stock: number;
-}
+import {DataProps} from '../../@types/dataProps';
 
 const API_DATA = gql`
   query GetRates {
@@ -37,6 +28,7 @@ const API_DATA = gql`
       imageUrl
       description
       stock
+      package
     }
   }
 `;
@@ -53,51 +45,43 @@ const ProductList: DataProps | any = () => {
     );
   }
   if (error) {
-    return <Text>Error :(</Text>;
+    return <Text>Error :{error}</Text>;
   }
-  return data.allSkus.map(
-    ({
-      id,
-      name,
-      salePrice,
-      promotionalPrice,
-      imageUrl,
-      description,
-      stock,
-    }: DataProps) => (
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('Details', {
-            name: name,
-            salePrice: salePrice,
-            imageUrl: imageUrl,
-            description: description,
-            promotionalPrice: promotionalPrice,
-            stock: stock,
-          })
-        }
-        key={id}>
-        <Card>
-          <Container>
-            <Image
-              source={{
-                uri: `${imageUrl}`,
-              }}
-              PlaceholderContent={<ActivityIndicator />}
-              resizeMode="cover"
-            />
-            <Info>
-              <CardTitle
-                style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
-                {name}
-              </CardTitle>
-              <Price>{formatPrice(salePrice)}</Price>
-            </Info>
-          </Container>
-        </Card>
-      </TouchableOpacity>
-    ),
-  );
+  return data.allSkus.map((skus: DataProps) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('Details', {
+          id: skus.id,
+          name: skus.name,
+          salePrice: skus.salePrice,
+          imageUrl: skus.imageUrl,
+          description: skus.description,
+          promotionalPrice: skus.promotionalPrice,
+          stock: skus.stock,
+          dimensions: skus.package,
+        })
+      }
+      key={skus.id}>
+      <Card>
+        <Container>
+          <Image
+            source={{
+              uri: `${skus.imageUrl}`,
+            }}
+            PlaceholderContent={<ActivityIndicator />}
+            resizeMode="cover"
+          />
+          <Info>
+            <CardTitle
+              style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
+              {skus.name}
+            </CardTitle>
+            <Price>{formatPrice(skus.salePrice)}</Price>
+          </Info>
+        </Container>
+      </Card>
+    </TouchableOpacity>
+  ));
 };
 
 function HomeScreen() {
