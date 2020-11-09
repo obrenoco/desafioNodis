@@ -70,7 +70,12 @@ export const Divider = styled.View`
   opacity: 0.2;
 `;
 
-export const ProductInfos = styled.TouchableOpacity`
+export const InfoContainer = styled.View`
+  flex: 1;
+  padding: 1px;
+`;
+
+export const InfoTitle = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 25px 2px;
@@ -78,15 +83,45 @@ export const ProductInfos = styled.TouchableOpacity`
   border-bottom-color: grey;
 `;
 
-export const ProductInfoText = styled.Text`
+export const InfoTitleText = styled.Text`
   font-family: 'Rubik-Medium';
   font-size: 16px;
   margin-left: 12px;
 `;
 
-export const Description = styled.Text`
-  margin: 20px 0;
+export const InfoDescription = styled.TextInput`
   line-height: 24px;
   font-family: 'Rubik-Light';
   font-size: 20px;
+  text-align: justify;
+`;
+
+export const Item = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ItemTitle = styled.Text`
+  font-family: 'Rubik-Bold';
+`;
+
+export const ItemDescription = styled.TextInput`
+  font-family: 'Rubik-Regular';
+`;
+
+export const ItemUnity = styled.Text`
+  font-family: 'Rubik-Regular';
+`;
+
+export const InfoEdit = styled.View`
+  /* flex-direction: row; */
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: 12px;
+`;
+
+export const InfoEditText = styled.Text`
+  font-family: 'Rubik-Regular';
+  font-size: 12px;
+  margin-right: 10px;
 `;

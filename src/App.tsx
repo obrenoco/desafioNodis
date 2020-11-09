@@ -36,11 +36,7 @@ function App() {
             headerTitleAlign: 'center',
           }}
         />
-        <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
-          options={{headerTransparent: true}}
-        />
+        <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
