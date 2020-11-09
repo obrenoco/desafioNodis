@@ -4,6 +4,7 @@ import {ActivityIndicator, Text} from 'react-native';
 import {Card} from 'react-native-elements';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {gql, useQuery} from '@apollo/client';
+import formatPrice from '../../utils/formatPrice';
 
 import {
   Wrapper,
@@ -18,7 +19,7 @@ import {
 interface DataProps {
   id: number;
   name: string;
-  salePrice: string;
+  salePrice: number;
   imageUrl: string;
 }
 
@@ -63,7 +64,7 @@ const ProductList: DataProps | any = () => {
               style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
               {name}
             </CardTitle>
-            <Price>R$ {salePrice}</Price>
+            <Price>{formatPrice(salePrice)}</Price>
           </Info>
         </Container>
       </Card>
