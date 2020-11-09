@@ -3,6 +3,7 @@ import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import {Card} from 'react-native-elements';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
 import {
   Wrapper,
@@ -16,6 +17,24 @@ import {
 
 function HomeScreen() {
   const navigation = useNavigation();
+  const client = new ApolloClient({
+    uri: 'http://10.0.2.2:3000',
+    cache: new InMemoryCache(),
+  });
+
+  client
+    .query({
+      query: gql`
+        query GetRates {
+          allSkus {
+            id
+            name
+            salePrice
+          }
+        }
+      `,
+    })
+    .then((result) => console.log(result.data));
 
   return (
     <ScrollView>
