@@ -21,7 +21,10 @@ interface DataProps {
   id: number;
   name: string;
   salePrice: number;
+  promotionalPrice: number;
   imageUrl: string;
+  description: string;
+  stock: number;
 }
 
 const API_DATA = gql`
@@ -30,7 +33,10 @@ const API_DATA = gql`
       id
       name
       salePrice
+      promotionalPrice
       imageUrl
+      description
+      stock
     }
   }
 `;
@@ -49,28 +55,49 @@ const ProductList: DataProps | any = () => {
   if (error) {
     return <Text>Error :(</Text>;
   }
-  return data.allSkus.map(({id, name, salePrice, imageUrl}: DataProps) => (
-    <TouchableOpacity onPress={() => navigation.navigate('Details')} key={id}>
-      <Card>
-        <Container>
-          <Image
-            source={{
-              uri: `${imageUrl}`,
-            }}
-            PlaceholderContent={<ActivityIndicator />}
-            resizeMode="cover"
-          />
-          <Info>
-            <CardTitle
-              style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
-              {name}
-            </CardTitle>
-            <Price>{formatPrice(salePrice)}</Price>
-          </Info>
-        </Container>
-      </Card>
-    </TouchableOpacity>
-  ));
+  return data.allSkus.map(
+    ({
+      id,
+      name,
+      salePrice,
+      promotionalPrice,
+      imageUrl,
+      description,
+      stock,
+    }: DataProps) => (
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('Details', {
+            name: name,
+            salePrice: salePrice,
+            imageUrl: imageUrl,
+            description: description,
+            promotionalPrice: promotionalPrice,
+            stock: stock,
+          })
+        }
+        key={id}>
+        <Card>
+          <Container>
+            <Image
+              source={{
+                uri: `${imageUrl}`,
+              }}
+              PlaceholderContent={<ActivityIndicator />}
+              resizeMode="cover"
+            />
+            <Info>
+              <CardTitle
+                style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
+                {name}
+              </CardTitle>
+              <Price>{formatPrice(salePrice)}</Price>
+            </Info>
+          </Container>
+        </Card>
+      </TouchableOpacity>
+    ),
+  );
 };
 
 function HomeScreen() {
