@@ -36,7 +36,7 @@ export const CardTitle = styled(Card.Title)`
 `;
 
 export const Price = styled.Text`
-  font-family: 'Rubik-Bold';
+  font-family: 'Rubik-Medium';
   text-align: right;
   font-size: 24px;
 `;

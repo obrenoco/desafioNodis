@@ -35,7 +35,7 @@ function HomeScreen() {
               />
               <Info>
                 <CardTitle
-                  style={{fontFamily: 'Rubik-Bold', fontWeight: 'normal'}}>
+                  style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
                   Óculos Shimano AeroLite
                 </CardTitle>
                 <Price>R$ 419,00</Price>
