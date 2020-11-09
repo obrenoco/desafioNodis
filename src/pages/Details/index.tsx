@@ -134,26 +134,28 @@ export default function Details() {
               </InfoEdit>
 
               <Item>
-                <ItemTitle>Altura:</ItemTitle>
+                <ItemTitle>Preço: </ItemTitle>
+                <ItemUnity>R$</ItemUnity>
                 <ItemDescription
                   editable={isPriceEditable}
+                  keyboardType="numeric"
                   style={{
                     color: 'black',
                     opacity: 1,
                     textAlign: 'right',
                   }}>
-                  130
+                  130,00
                 </ItemDescription>
-                <ItemUnity>cm</ItemUnity>
               </Item>
               <Item>
-                <ItemTitle>Peso:</ItemTitle>
+                <ItemTitle>Preço promocional: </ItemTitle>
+                <ItemUnity>R$</ItemUnity>
                 <ItemDescription
                   editable={isPriceEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  1
+                  120,00
                 </ItemDescription>
-                <ItemUnity>kg</ItemUnity>
               </Item>
             </InfoContainer>
 
@@ -173,6 +175,7 @@ export default function Details() {
                 <ItemTitle>Altura:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{
                     color: 'black',
                     opacity: 1,
@@ -186,6 +189,7 @@ export default function Details() {
                 <ItemTitle>Largura:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
                   130
                 </ItemDescription>
@@ -195,6 +199,7 @@ export default function Details() {
                 <ItemTitle>Profundidade:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
                   130
                 </ItemDescription>
@@ -204,6 +209,7 @@ export default function Details() {
                 <ItemTitle>Peso:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
                   1
                 </ItemDescription>
