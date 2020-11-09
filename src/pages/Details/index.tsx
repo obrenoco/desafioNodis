@@ -65,7 +65,7 @@ export default function Details() {
             <StockTitle>Estoque disponível</StockTitle>
             <NumericInput
               type="plus-minus"
-              onChange={(value) => console.log(value)}
+              onChange={() => {}}
               minValue={0}
               maxValue={3}
               rounded
