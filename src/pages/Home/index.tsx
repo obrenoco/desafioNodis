@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import Product from './components/Product';
 
-import {Container} from './styles';
+import {Container, Title} from './styles';
 
 class HomeScreen extends React.Component {
   render() {
@@ -10,6 +10,7 @@ class HomeScreen extends React.Component {
       <ScrollView>
         <Container>
           <ScrollView>
+            <Title>Products (10)</Title>
             <Product />
             <Product />
             <Product />
