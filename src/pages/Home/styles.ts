@@ -4,13 +4,20 @@ import {Card} from 'react-native-elements';
 export const Wrapper = styled.View`
   background-color: #f4f4f3;
   flex: 1;
-  margin-bottom: 10px;
+  margin: 20px 10px 27px;
 `;
 
 export const Title = styled.Text`
   font-family: 'Rubik-Medium';
   font-size: 24px;
-  margin: 20px 10px 5px;
+`;
+
+export const Underline = styled.View`
+  margin-top: 3px;
+  background-color: #00b97a;
+  border-radius: 10px;
+  height: 2px;
+  width: 100px;
 `;
 
 export const Container = styled.View`

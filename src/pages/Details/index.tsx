@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Switch, View} from 'react-native';
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 import NumericInput from 'react-native-numeric-input';
+import {RoutesDataProps} from '../../@types/dataProps';
+import formatPrice from '../../utils/formatPrice';
 
 import BuyButtons from './components/BuyButtons';
 import InfoTitle from './components/InfoTitle';
@@ -27,7 +29,19 @@ import {
 const MIN_HEIGHT = 0;
 const MAX_HEIGHT = 350;
 
-export default function Details() {
+export default function Details({
+  route: {
+    params: {
+      name,
+      salePrice,
+      description,
+      imageUrl,
+      promotionalPrice,
+      stock,
+      dimensions,
+    },
+  },
+}: RoutesDataProps) {
   const [isInfoEditable, setIsInfoEditable] = useState(false);
   const [isDimensionEditable, setIsDimensionEditable] = useState(false);
   const [isPriceEditable, setIsPriceEditable] = useState(false);
@@ -50,16 +64,13 @@ export default function Details() {
         renderHeader={() => (
           <Image
             source={{
-              uri:
-                'https://images-submarino.b2w.io/produtos/01/00/sku/34869/5/34869530P1.jpg',
+              uri: `${imageUrl}`,
             }}
           />
         )}>
         <Wrapper>
-          <ProductTitle>
-            Jogo Game Of Life Meu Malvado Favorito - Hasbro
-          </ProductTitle>
-          <Price>R$ 200,00</Price>
+          <ProductTitle>{name}</ProductTitle>
+          <Price>{formatPrice(salePrice)}</Price>
 
           <Stock>
             <StockTitle>Estoque disponível</StockTitle>
@@ -67,7 +78,7 @@ export default function Details() {
               type="plus-minus"
               onChange={() => {}}
               minValue={0}
-              maxValue={3}
+              maxValue={stock}
               rounded
               rightButtonBackgroundColor="#00b97a"
               leftButtonBackgroundColor="#00b97a"
@@ -98,25 +109,7 @@ export default function Details() {
                 editable={isInfoEditable}
                 multiline
                 style={{color: 'black', opacity: 1}}>
-                A melhor forma de otimizar o aproveitamento da capacidade de um
-                computador é compreender os princípios básicos do seu
-                funcionamento. A obra, em sua segunda edição, revista e
-                atualizada, descreve as técnicas subjacentes às várias
-                arquiteturas de computador, desde os pequenos microcontroladores
-                até os grandes servidores, passando pelos computadores pessoais
-                (PC). O livro ensina como construir computadores com simples
-                portas lógicas; como é possível com apenas dois símbolos (0 e
-                1), dominar o mundo; conjunto de instruções e programação em
-                linguagem assembly; como programas conseguem ser executados por
-                um computador; equilíbrio harmonioso entre os vários componentes
-                de um computador; como se projeta um computador;
-                microprogramação, pipelining, caches e memória virtual; suporte
-                para os sistemas operacionais (processos); evoluções mais
-                recentes dos processadores. A obra também inclui os últimos
-                avanços tecnológicos verificados em processadores comerciais.
-                Materiais suplementares, entre os quais, guias de laboratório,
-                simulador, slides com animação e exercícios resolvidos,
-                encontram-se disponíveis no site.
+                {description}
               </InfoDescription>
             </InfoContainer>
 
@@ -134,26 +127,26 @@ export default function Details() {
               </InfoEdit>
 
               <Item>
-                <ItemTitle>Altura:</ItemTitle>
+                <ItemTitle>Preço: </ItemTitle>
                 <ItemDescription
                   editable={isPriceEditable}
+                  keyboardType="numeric"
                   style={{
                     color: 'black',
                     opacity: 1,
                     textAlign: 'right',
                   }}>
-                  130
+                  {formatPrice(salePrice)}
                 </ItemDescription>
-                <ItemUnity>cm</ItemUnity>
               </Item>
               <Item>
-                <ItemTitle>Peso:</ItemTitle>
+                <ItemTitle>Preço promocional: </ItemTitle>
                 <ItemDescription
                   editable={isPriceEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  1
+                  {formatPrice(promotionalPrice)}
                 </ItemDescription>
-                <ItemUnity>kg</ItemUnity>
               </Item>
             </InfoContainer>
 
@@ -173,12 +166,13 @@ export default function Details() {
                 <ItemTitle>Altura:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{
                     color: 'black',
                     opacity: 1,
                     textAlign: 'right',
                   }}>
-                  130
+                  {dimensions.height}
                 </ItemDescription>
                 <ItemUnity>cm</ItemUnity>
               </Item>
@@ -186,8 +180,9 @@ export default function Details() {
                 <ItemTitle>Largura:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  130
+                  {dimensions.width}
                 </ItemDescription>
                 <ItemUnity>cm</ItemUnity>
               </Item>
@@ -195,8 +190,9 @@ export default function Details() {
                 <ItemTitle>Profundidade:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  130
+                  {dimensions.depth}
                 </ItemDescription>
                 <ItemUnity>cm</ItemUnity>
               </Item>
@@ -204,10 +200,11 @@ export default function Details() {
                 <ItemTitle>Peso:</ItemTitle>
                 <ItemDescription
                   editable={isDimensionEditable}
+                  keyboardType="numeric"
                   style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  1
+                  {dimensions.weight}
                 </ItemDescription>
-                <ItemUnity>kg</ItemUnity>
+                <ItemUnity>g</ItemUnity>
               </Item>
             </InfoContainer>
           </View>
