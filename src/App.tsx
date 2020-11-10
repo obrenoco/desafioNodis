@@ -14,6 +14,7 @@ import {Image} from 'react-native';
 const Stack = createStackNavigator();
 
 const client = new ApolloClient({
+  //uri: 'http://localhost:3000', <= Para emuladores iOS
   uri: 'http://10.0.2.2:3000',
   cache: new InMemoryCache(),
 });
