@@ -43,7 +43,11 @@ function App() {
               headerTitleAlign: 'center',
             }}
           />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen
+            name="Details"
+            component={DetailsScreen}
+            options={{headerTitle: 'Detalhes'}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
