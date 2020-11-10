@@ -11,8 +11,8 @@ export const Wrapper = styled.View`
 
 export const Image = styled.Image`
   margin: 0 auto;
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
 `;
 
 export const ProductTitle = styled.Text`
