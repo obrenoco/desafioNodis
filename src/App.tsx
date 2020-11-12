@@ -5,7 +5,7 @@
 import * as React from 'react';
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 
-import Route from './navigation';
+import Route from './navigation/routes';
 
 const client = new ApolloClient({
   //uri: 'http://localhost:3000', <= Para emuladores iOS
