@@ -3,15 +3,9 @@
  */
 
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 
-import HomeScreen from './pages/Home';
-import DetailsScreen from './pages/Details';
-import {Image} from 'react-native';
-
-const Stack = createStackNavigator();
+import Route from './navigation/routes';
 
 const client = new ApolloClient({
   //uri: 'http://localhost:3000', <= Para emuladores iOS
@@ -19,38 +13,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function LogoTitle() {
-  return (
-    <Image
-      style={{
-        width: 50,
-        height: 50,
-      }}
-      source={require('../assets/images/logo.png')}
-    />
-  );
-}
-
 function App() {
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              headerTitle: () => <LogoTitle />,
-              headerTitleAlign: 'center',
-            }}
-          />
-          <Stack.Screen
-            name="Details"
-            component={DetailsScreen}
-            options={{headerTitle: 'Detalhes'}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Route />
     </ApolloProvider>
   );
 }
