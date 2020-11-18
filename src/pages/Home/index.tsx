@@ -10,7 +10,6 @@ import {
   Wrapper,
   Container,
   Title,
-  Underline,
   CardTitle,
   Info,
   Image,
@@ -89,7 +88,6 @@ function HomeScreen() {
     <ScrollView>
       <Wrapper>
         <Title>Produtos</Title>
-        <Underline />
         <ProductList />
       </Wrapper>
     </ScrollView>

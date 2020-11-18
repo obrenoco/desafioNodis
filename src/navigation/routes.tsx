@@ -34,6 +34,7 @@ function Route() {
           options={{
             headerTitle: () => <LogoTitle />,
             headerTitleAlign: 'center',
+            headerShown: false,
           }}
         />
         <Stack.Screen
