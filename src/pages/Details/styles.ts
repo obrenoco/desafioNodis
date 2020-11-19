@@ -1,19 +1,28 @@
 import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
-  padding: 15px;
+  background-color: #fff;
+  padding: 0 16px;
   border-radius: 10px;
 `;
 
+export const ImageFrame = styled.View`
+  width: 196px;
+  height: 196px;
+  margin: 4px auto;
+`;
+
 export const Image = styled.Image`
-  margin: 0 auto;
-  width: 300px;
-  height: 300px;
+  height: 100%;
+  width: 100%;
 `;
 
 export const ProductTitle = styled.Text`
   font-family: 'Rubik-Regular';
-  font-size: 20px;
+  color: #333333;
+  margin: 7px 0 15px;
+  font-size: 21px;
+  line-height: 24px;
 `;
 
 export const Stock = styled.View`

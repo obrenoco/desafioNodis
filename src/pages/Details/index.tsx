@@ -1,7 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {Switch, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import NumericInput from 'react-native-numeric-input';
 import {RoutesDataProps} from '../../@types/dataProps';
 import formatPrice from '../../utils/formatPrice';
 
@@ -10,6 +10,7 @@ import InfoTitle from './components/InfoTitle';
 
 import {
   Wrapper,
+  ImageFrame,
   Image,
   ProductTitle,
   Stock,
@@ -33,7 +34,6 @@ export default function Details({
       description,
       imageUrl,
       promotionalPrice,
-      stock,
       dimensions,
     },
   },
@@ -53,27 +53,19 @@ export default function Details({
 
   return (
     <ScrollView>
-      <Image
-        source={{
-          uri: `${imageUrl}`,
-        }}
-      />
       <Wrapper>
         <ProductTitle>{name}</ProductTitle>
+        <ImageFrame>
+          <Image
+            source={{
+              uri: `${imageUrl}`,
+            }}
+          />
+        </ImageFrame>
         <Price>{formatPrice(salePrice)}</Price>
 
         <Stock>
           <StockTitle>Estoque disponível</StockTitle>
-          <NumericInput
-            type="plus-minus"
-            onChange={() => {}}
-            minValue={0}
-            maxValue={stock}
-            rounded
-            rightButtonBackgroundColor="#00b97a"
-            leftButtonBackgroundColor="#00b97a"
-            iconStyle={{color: '#fff'}}
-          />
         </Stock>
 
         <BuyButtons />
