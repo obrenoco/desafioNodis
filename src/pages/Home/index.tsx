@@ -1,7 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {ActivityIndicator, Text} from 'react-native';
-import {Card} from 'react-native-elements';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {gql, useQuery} from '@apollo/client';
 import formatPrice from '../../utils/formatPrice';
@@ -9,12 +8,15 @@ import formatPrice from '../../utils/formatPrice';
 import {
   Wrapper,
   Container,
+  Divider,
   Title,
-  Underline,
-  CardTitle,
+  ItemTitle,
   Info,
   Image,
+  ImageFrame,
   Price,
+  Amount,
+  ItemValue,
 } from './styles';
 import {DataProps} from '../../@types/dataProps';
 
@@ -49,6 +51,7 @@ const ProductList: DataProps | any = () => {
   }
   return data.allSkus.map((skus: DataProps) => (
     <TouchableOpacity
+      activeOpacity={0.7}
       onPress={() =>
         navigation.navigate('Details', {
           id: skus.id,
@@ -62,24 +65,22 @@ const ProductList: DataProps | any = () => {
         })
       }
       key={skus.id}>
-      <Card>
-        <Container>
-          <Image
-            source={{
-              uri: `${skus.imageUrl}`,
-            }}
-            PlaceholderContent={<ActivityIndicator />}
-            resizeMode="cover"
-          />
-          <Info>
-            <CardTitle
-              style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
-              {skus.name}
-            </CardTitle>
-            <Price>{formatPrice(skus.salePrice)}</Price>
-          </Info>
-        </Container>
-      </Card>
+      <Container>
+        <ImageFrame>
+          <Image source={{uri: `${skus.imageUrl}`}} />
+        </ImageFrame>
+        <Info>
+          <ItemTitle
+            style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
+            {skus.name}
+          </ItemTitle>
+          <Price>
+            <Amount>1 X</Amount>
+            <ItemValue>{formatPrice(skus.salePrice)}</ItemValue>
+          </Price>
+        </Info>
+      </Container>
+      <Divider />
     </TouchableOpacity>
   ));
 };
@@ -89,7 +90,6 @@ function HomeScreen() {
     <ScrollView>
       <Wrapper>
         <Title>Produtos</Title>
-        <Underline />
         <ProductList />
       </Wrapper>
     </ScrollView>

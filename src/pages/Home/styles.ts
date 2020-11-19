@@ -1,49 +1,72 @@
 import styled from 'styled-components/native';
-import {Card} from 'react-native-elements';
 
 export const Wrapper = styled.View`
-  background-color: #f4f4f3;
+  background-color: #ffffff;
   flex: 1;
-  margin: 20px 10px 27px;
+  padding: 6px 16px;
 `;
 
 export const Title = styled.Text`
   font-family: 'Rubik-Medium';
-  font-size: 24px;
-`;
-
-export const Underline = styled.View`
-  margin-top: 3px;
-  background-color: #00b97a;
-  border-radius: 10px;
-  height: 2px;
-  width: 100px;
+  color: #333333;
+  font-size: 21px;
+  margin-top: 30px;
 `;
 
 export const Container = styled.View`
+  flex: 1;
   flex-direction: row;
+  margin-top: 16px;
+  padding: 15px 0;
 `;
 
-export const Image = styled(Card.Image)`
-  width: 100px;
-  height: 100px;
+export const Divider = styled.View`
+  height: 1px;
+  background-color: #dfe3e8;
+  padding: 0 2px;
+`;
+
+export const ImageFrame = styled.View`
+  border-color: #dfe4e8;
+  border-width: 1px;
+  padding: 2px;
+  width: 48px;
+  height: 45px;
+`;
+
+export const Image = styled.Image`
+  width: 100%;
+  height: 100%;
 `;
 
 export const Info = styled.View`
   flex: 1;
-  text-align: center;
-  justify-content: center;
-  margin: 0 15px;
+  padding: 0 16px;
+  justify-content: flex-start;
 `;
 
-export const CardTitle = styled(Card.Title)`
-  text-align: left;
-  font-size: 18px;
-  color: #000;
+export const ItemTitle = styled.Text`
+  font-family: 'Rubik-Regular';
+  font-size: 15px;
+  color: #333333;
+  line-height: 20px;
 `;
 
-export const Price = styled.Text`
-  font-family: 'Rubik-Medium';
-  text-align: right;
-  font-size: 24px;
+export const Price = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8px;
+`;
+
+export const Amount = styled.Text`
+  font-family: 'Rubik-Regular';
+  color: #212b36;
+  font-size: 13px;
+  margin-right: 4px;
+`;
+
+export const ItemValue = styled.Text`
+  font-family: 'Rubik-Regular';
+  color: #212b36;
+  font-size: 13px;
 `;
