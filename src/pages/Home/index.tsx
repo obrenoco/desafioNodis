@@ -1,13 +1,16 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {ActivityIndicator, Text} from 'react-native';
+import {Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {gql, useQuery} from '@apollo/client';
+
 import formatPrice from '../../utils/formatPrice';
+import {DataProps} from '../../@types/dataProps';
 
 import {
   Wrapper,
   Container,
+  Loading,
   Divider,
   Title,
   ItemTitle,
@@ -18,7 +21,6 @@ import {
   Amount,
   ItemValue,
 } from './styles';
-import {DataProps} from '../../@types/dataProps';
 
 const API_DATA = gql`
   query GetRates {
@@ -40,11 +42,7 @@ const ProductList: DataProps | any = () => {
   const {loading, error, data} = useQuery(API_DATA);
 
   if (loading) {
-    return (
-      <ActivityIndicator
-        style={{justifyContent: 'center', alignItems: 'center'}}
-      />
-    );
+    return <Loading />;
   }
   if (error) {
     return <Text>Error :{error}</Text>;
@@ -70,10 +68,7 @@ const ProductList: DataProps | any = () => {
           <Image source={{uri: `${skus.imageUrl}`}} />
         </ImageFrame>
         <Info>
-          <ItemTitle
-            style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
-            {skus.name}
-          </ItemTitle>
+          <ItemTitle>{skus.name}</ItemTitle>
           <Price>
             <Amount>1 X</Amount>
             <ItemValue>{formatPrice(skus.salePrice)}</ItemValue>
