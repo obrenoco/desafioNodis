@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Switch, View} from 'react-native';
-import HeaderImageScrollView from 'react-native-image-header-scroll-view';
+import {ScrollView} from 'react-native-gesture-handler';
 import NumericInput from 'react-native-numeric-input';
 import {RoutesDataProps} from '../../@types/dataProps';
 import formatPrice from '../../utils/formatPrice';
@@ -9,7 +9,6 @@ import BuyButtons from './components/BuyButtons';
 import InfoTitle from './components/InfoTitle';
 
 import {
-  Container,
   Wrapper,
   Image,
   ProductTitle,
@@ -25,9 +24,6 @@ import {
   InfoEdit,
   InfoEditText,
 } from './styles';
-
-const MIN_HEIGHT = 0;
-const MAX_HEIGHT = 350;
 
 export default function Details({
   route: {
@@ -56,160 +52,150 @@ export default function Details({
     setIsPriceEditable((previousState) => !previousState);
 
   return (
-    <Container>
-      <HeaderImageScrollView
-        maxHeight={MAX_HEIGHT}
-        minHeight={MIN_HEIGHT}
-        maxOverlayOpacity={0.6}
-        renderHeader={() => (
-          <Image
-            source={{
-              uri: `${imageUrl}`,
-            }}
+    <ScrollView>
+      <Image
+        source={{
+          uri: `${imageUrl}`,
+        }}
+      />
+      <Wrapper>
+        <ProductTitle>{name}</ProductTitle>
+        <Price>{formatPrice(salePrice)}</Price>
+
+        <Stock>
+          <StockTitle>Estoque disponível</StockTitle>
+          <NumericInput
+            type="plus-minus"
+            onChange={() => {}}
+            minValue={0}
+            maxValue={stock}
+            rounded
+            rightButtonBackgroundColor="#00b97a"
+            leftButtonBackgroundColor="#00b97a"
+            iconStyle={{color: '#fff'}}
           />
-        )}>
-        <Wrapper>
-          <ProductTitle>{name}</ProductTitle>
-          <Price>{formatPrice(salePrice)}</Price>
+        </Stock>
 
-          <Stock>
-            <StockTitle>Estoque disponível</StockTitle>
-            <NumericInput
-              type="plus-minus"
-              onChange={() => {}}
-              minValue={0}
-              maxValue={stock}
-              rounded
-              rightButtonBackgroundColor="#00b97a"
-              leftButtonBackgroundColor="#00b97a"
-              iconStyle={{color: '#fff'}}
-            />
-          </Stock>
+        <BuyButtons />
 
-          <BuyButtons />
+        <View>
+          <InfoContainer>
+            <InfoTitle icon="file-text" description="Informações do produto" />
 
-          <View>
-            <InfoContainer>
-              <InfoTitle
-                icon="file-text"
-                description="Informações do produto"
+            <InfoEdit>
+              <InfoEditText>Editar</InfoEditText>
+              <Switch
+                trackColor={{true: '#00b97a', false: '#767577'}}
+                thumbColor={isInfoEditable ? '#f4f3f4' : '#f4f3f4'}
+                onValueChange={toggleSwitchInfo}
+                value={isInfoEditable}
               />
+            </InfoEdit>
 
-              <InfoEdit>
-                <InfoEditText>Editar</InfoEditText>
-                <Switch
-                  trackColor={{true: '#00b97a', false: '#767577'}}
-                  thumbColor={isInfoEditable ? '#f4f3f4' : '#f4f3f4'}
-                  onValueChange={toggleSwitchInfo}
-                  value={isInfoEditable}
-                />
-              </InfoEdit>
+            <InfoDescription
+              editable={isInfoEditable}
+              multiline
+              style={{color: 'black', opacity: 1}}>
+              {description}
+            </InfoDescription>
+          </InfoContainer>
 
-              <InfoDescription
-                editable={isInfoEditable}
-                multiline
-                style={{color: 'black', opacity: 1}}>
-                {description}
-              </InfoDescription>
-            </InfoContainer>
+          <InfoContainer>
+            <InfoTitle icon="percent" description="Preço e promoções" />
 
-            <InfoContainer>
-              <InfoTitle icon="percent" description="Preço e promoções" />
+            <InfoEdit>
+              <InfoEditText>Editar</InfoEditText>
+              <Switch
+                trackColor={{true: '#00b97a', false: '#767577'}}
+                thumbColor={isInfoEditable ? '#f4f3f4' : '#f4f3f4'}
+                onValueChange={toggleSwitchPrice}
+                value={isPriceEditable}
+              />
+            </InfoEdit>
 
-              <InfoEdit>
-                <InfoEditText>Editar</InfoEditText>
-                <Switch
-                  trackColor={{true: '#00b97a', false: '#767577'}}
-                  thumbColor={isInfoEditable ? '#f4f3f4' : '#f4f3f4'}
-                  onValueChange={toggleSwitchPrice}
-                  value={isPriceEditable}
-                />
-              </InfoEdit>
+            <Item>
+              <ItemTitle>Preço: </ItemTitle>
+              <ItemDescription
+                editable={isPriceEditable}
+                keyboardType="numeric"
+                style={{
+                  color: 'black',
+                  opacity: 1,
+                  textAlign: 'right',
+                }}>
+                {formatPrice(salePrice)}
+              </ItemDescription>
+            </Item>
+            <Item>
+              <ItemTitle>Preço promocional: </ItemTitle>
+              <ItemDescription
+                editable={isPriceEditable}
+                keyboardType="numeric"
+                style={{color: 'black', opacity: 1, textAlign: 'right'}}>
+                {formatPrice(promotionalPrice)}
+              </ItemDescription>
+            </Item>
+          </InfoContainer>
 
-              <Item>
-                <ItemTitle>Preço: </ItemTitle>
-                <ItemDescription
-                  editable={isPriceEditable}
-                  keyboardType="numeric"
-                  style={{
-                    color: 'black',
-                    opacity: 1,
-                    textAlign: 'right',
-                  }}>
-                  {formatPrice(salePrice)}
-                </ItemDescription>
-              </Item>
-              <Item>
-                <ItemTitle>Preço promocional: </ItemTitle>
-                <ItemDescription
-                  editable={isPriceEditable}
-                  keyboardType="numeric"
-                  style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  {formatPrice(promotionalPrice)}
-                </ItemDescription>
-              </Item>
-            </InfoContainer>
+          <InfoContainer>
+            <InfoTitle icon="box" description="Dimensões do produto" />
+            <InfoEdit>
+              <InfoEditText>Editar</InfoEditText>
+              <Switch
+                trackColor={{true: '#00b97a', false: '#767577'}}
+                thumbColor={isDimensionEditable ? '#f4f3f4' : '#f4f3f4'}
+                onValueChange={toggleSwitchDimension}
+                value={isDimensionEditable}
+              />
+            </InfoEdit>
 
-            <InfoContainer>
-              <InfoTitle icon="box" description="Dimensões do produto" />
-              <InfoEdit>
-                <InfoEditText>Editar</InfoEditText>
-                <Switch
-                  trackColor={{true: '#00b97a', false: '#767577'}}
-                  thumbColor={isDimensionEditable ? '#f4f3f4' : '#f4f3f4'}
-                  onValueChange={toggleSwitchDimension}
-                  value={isDimensionEditable}
-                />
-              </InfoEdit>
-
-              <Item>
-                <ItemTitle>Altura:</ItemTitle>
-                <ItemDescription
-                  editable={isDimensionEditable}
-                  keyboardType="numeric"
-                  style={{
-                    color: 'black',
-                    opacity: 1,
-                    textAlign: 'right',
-                  }}>
-                  {dimensions.height}
-                </ItemDescription>
-                <ItemUnity>cm</ItemUnity>
-              </Item>
-              <Item>
-                <ItemTitle>Largura:</ItemTitle>
-                <ItemDescription
-                  editable={isDimensionEditable}
-                  keyboardType="numeric"
-                  style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  {dimensions.width}
-                </ItemDescription>
-                <ItemUnity>cm</ItemUnity>
-              </Item>
-              <Item>
-                <ItemTitle>Profundidade:</ItemTitle>
-                <ItemDescription
-                  editable={isDimensionEditable}
-                  keyboardType="numeric"
-                  style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  {dimensions.depth}
-                </ItemDescription>
-                <ItemUnity>cm</ItemUnity>
-              </Item>
-              <Item>
-                <ItemTitle>Peso:</ItemTitle>
-                <ItemDescription
-                  editable={isDimensionEditable}
-                  keyboardType="numeric"
-                  style={{color: 'black', opacity: 1, textAlign: 'right'}}>
-                  {dimensions.weight}
-                </ItemDescription>
-                <ItemUnity>g</ItemUnity>
-              </Item>
-            </InfoContainer>
-          </View>
-        </Wrapper>
-      </HeaderImageScrollView>
-    </Container>
+            <Item>
+              <ItemTitle>Altura:</ItemTitle>
+              <ItemDescription
+                editable={isDimensionEditable}
+                keyboardType="numeric"
+                style={{
+                  color: 'black',
+                  opacity: 1,
+                  textAlign: 'right',
+                }}>
+                {dimensions.height}
+              </ItemDescription>
+              <ItemUnity>cm</ItemUnity>
+            </Item>
+            <Item>
+              <ItemTitle>Largura:</ItemTitle>
+              <ItemDescription
+                editable={isDimensionEditable}
+                keyboardType="numeric"
+                style={{color: 'black', opacity: 1, textAlign: 'right'}}>
+                {dimensions.width}
+              </ItemDescription>
+              <ItemUnity>cm</ItemUnity>
+            </Item>
+            <Item>
+              <ItemTitle>Profundidade:</ItemTitle>
+              <ItemDescription
+                editable={isDimensionEditable}
+                keyboardType="numeric"
+                style={{color: 'black', opacity: 1, textAlign: 'right'}}>
+                {dimensions.depth}
+              </ItemDescription>
+              <ItemUnity>cm</ItemUnity>
+            </Item>
+            <Item>
+              <ItemTitle>Peso:</ItemTitle>
+              <ItemDescription
+                editable={isDimensionEditable}
+                keyboardType="numeric"
+                style={{color: 'black', opacity: 1, textAlign: 'right'}}>
+                {dimensions.weight}
+              </ItemDescription>
+              <ItemUnity>g</ItemUnity>
+            </Item>
+          </InfoContainer>
+        </View>
+      </Wrapper>
+    </ScrollView>
   );
 }
