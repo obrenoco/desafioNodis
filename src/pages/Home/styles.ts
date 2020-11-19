@@ -41,6 +41,7 @@ export const ItemTitle = styled.Text`
   font-family: 'Rubik-Regular';
   font-size: 15px;
   color: #333333;
+  line-height: 20px;
 `;
 
 export const Price = styled.View`

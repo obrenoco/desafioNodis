@@ -50,6 +50,7 @@ const ProductList: DataProps | any = () => {
   }
   return data.allSkus.map((skus: DataProps) => (
     <TouchableOpacity
+      activeOpacity={0.7}
       onPress={() =>
         navigation.navigate('Details', {
           id: skus.id,
@@ -71,7 +72,7 @@ const ProductList: DataProps | any = () => {
             {skus.name}
           </ItemTitle>
           <Price>
-            <Amount>1 x</Amount>
+            <Amount>1 X</Amount>
             <ItemValue>{formatPrice(skus.salePrice)}</ItemValue>
           </Price>
         </Info>
