@@ -1,28 +1,11 @@
-/**
- * @format
- */
-
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from '../pages/Home';
 import DetailsScreen from '../pages/Details';
-import {Image} from 'react-native';
 
 const Stack = createStackNavigator();
-
-function LogoTitle() {
-  return (
-    <Image
-      style={{
-        width: 50,
-        height: 50,
-      }}
-      source={require('../../assets/images/logo.png')}
-    />
-  );
-}
 
 function Route() {
   return (
@@ -32,15 +15,13 @@ function Route() {
           name="Home"
           component={HomeScreen}
           options={{
-            headerTitle: () => <LogoTitle />,
-            headerTitleAlign: 'center',
             headerShown: false,
           }}
         />
         <Stack.Screen
           name="Details"
           component={DetailsScreen}
-          options={{headerTitle: 'Detalhes'}}
+          options={{headerTitle: 'Produtos'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
