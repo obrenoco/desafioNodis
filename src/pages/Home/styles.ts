@@ -14,6 +14,7 @@ export const Title = styled.Text`
 `;
 
 export const Container = styled.View`
+  flex: 1;
   flex-direction: row;
   margin-top: 16px;
   padding: 15px 0;
@@ -25,16 +26,23 @@ export const Divider = styled.View`
   padding: 0 2px;
 `;
 
-export const Image = styled.Image`
+export const ImageFrame = styled.View`
+  border-color: #dfe4e8;
+  border-width: 1px;
+  padding: 2px;
   width: 48px;
   height: 45px;
 `;
 
+export const Image = styled.Image`
+  width: 100%;
+  height: 100%;
+`;
+
 export const Info = styled.View`
   flex: 1;
-  text-align: center;
+  padding: 0 16px;
   justify-content: flex-start;
-  margin: 0 15px;
 `;
 
 export const ItemTitle = styled.Text`

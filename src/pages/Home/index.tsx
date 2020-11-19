@@ -13,6 +13,7 @@ import {
   ItemTitle,
   Info,
   Image,
+  ImageFrame,
   Price,
   Amount,
   ItemValue,
@@ -65,7 +66,9 @@ const ProductList: DataProps | any = () => {
       }
       key={skus.id}>
       <Container>
-        <Image source={{uri: `${skus.imageUrl}`}} />
+        <ImageFrame>
+          <Image source={{uri: `${skus.imageUrl}`}} />
+        </ImageFrame>
         <Info>
           <ItemTitle
             style={{fontFamily: 'Rubik-Regular', fontWeight: 'normal'}}>
