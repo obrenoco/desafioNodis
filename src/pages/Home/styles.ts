@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
-  background-color: #f4f4f3;
+  background-color: #ffffff;
   flex: 1;
-  margin: 6px 16px;
+  padding: 6px 16px;
 `;
 
 export const Title = styled.Text`
