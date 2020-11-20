@@ -60,12 +60,14 @@ export const StockButton = styled.TouchableOpacity`
 `;
 
 export const Prices = styled.View`
+  flex: 1;
   flex-direction: row;
   justify-content: space-between;
 `;
 
 export const PriceContainer = styled.View`
   margin: 10px 0;
+  width: 48%;
 `;
 
 export const PriceTitle = styled.Text`
@@ -78,7 +80,7 @@ export const PriceTitle = styled.Text`
 export const PriceInput = styled.TextInput`
   border-color: #c4cdd5;
   border-width: 1px;
-  width: 170px;
+  width: 100%;
   padding-left: 13px;
 `;
 
