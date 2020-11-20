@@ -34,12 +34,11 @@ import formatWeight from '../../utils/formatWeight';
 
 export default function Details({
   route: {
-    params: {name, salePrice, imageUrl, promotionalPrice, dimensions},
+    params: {name, salePrice, imageUrl, promotionalPrice, dimensions, stock},
   },
 }: RoutesDataProps) {
-  const [stockVal, setStockVal] = useState(0);
+  const [stockVal = stock, setStockVal] = useState(stock);
   const increaseStock = () => setStockVal((prevStockVal) => prevStockVal + 1);
-
   const decreaseStock = () =>
     setStockVal((prevStockVal) =>
       prevStockVal > 0 ? prevStockVal - 1 : prevStockVal,
