@@ -2,8 +2,10 @@ import styled from 'styled-components/native';
 
 export const Wrapper = styled.ScrollView`
   background-color: #fff;
+`;
+
+export const Container = styled.View`
   padding: 0 16px;
-  border-radius: 10px;
 `;
 
 export const Title = styled.Text`
@@ -122,7 +124,11 @@ export const MeasureUnity = styled.Text`
   margin-left: 9px;
 `;
 
-export const Edit = styled.TouchableOpacity`
+export const Edit = styled.View`
+  margin-top: 35px;
+`;
+
+export const EditButton = styled.TouchableOpacity`
   align-self: flex-end;
   margin: 9px 16px;
   align-items: center;

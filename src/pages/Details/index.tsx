@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import {
   Wrapper,
+  Container,
   ImageContainer,
   Image,
   Title,
@@ -26,6 +27,7 @@ import {
   MeasureInput,
   MeasureUnity,
   Edit,
+  EditButton,
   TextEdit,
 } from './styles';
 
@@ -36,79 +38,84 @@ export default function Details({
 }: RoutesDataProps) {
   return (
     <Wrapper>
-      <Title>{name}</Title>
+      <Container>
+        <Title>{name}</Title>
 
-      <ImageContainer>
-        <Image
-          source={{
-            uri: `${imageUrl}`,
-          }}
-        />
-      </ImageContainer>
+        <ImageContainer>
+          <Image
+            source={{
+              uri: `${imageUrl}`,
+            }}
+          />
+        </ImageContainer>
 
-      <Stock>
-        <StockTitle>Estoque:</StockTitle>
-        <StockContainer>
-          <StockInput placeholder={'0'} keyboardType={'number-pad'} />
-          <StockButton activeOpacity={0.5} style={{marginLeft: 'auto'}}>
-            <Icon name="divide-circle" size={24} color="red" />
-          </StockButton>
-          <StockButton activeOpacity={0.5}>
-            <Icon name="plus-circle" size={24} color="green" />
-          </StockButton>
-        </StockContainer>
-      </Stock>
+        <Stock>
+          <StockTitle>Estoque:</StockTitle>
+          <StockContainer>
+            <StockInput placeholder={'0'} keyboardType={'number-pad'} />
+            <StockButton activeOpacity={0.5} style={{marginLeft: 'auto'}}>
+              <Icon name="divide-circle" size={24} color="red" />
+            </StockButton>
+            <StockButton activeOpacity={0.5}>
+              <Icon name="plus-circle" size={24} color="green" />
+            </StockButton>
+          </StockContainer>
+        </Stock>
 
-      <Prices>
-        <PriceContainer>
-          <PriceTitle>Preço de venda</PriceTitle>
-          <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
-        </PriceContainer>
+        <Prices>
+          <PriceContainer>
+            <PriceTitle>Preço de venda</PriceTitle>
+            <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+          </PriceContainer>
 
-        <PriceContainer>
-          <PriceTitle>Preço promocional</PriceTitle>
-          <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
-        </PriceContainer>
-      </Prices>
+          <PriceContainer>
+            <PriceTitle>Preço promocional</PriceTitle>
+            <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+          </PriceContainer>
+        </Prices>
 
-      <Measures>
-        <MeasureContainer>
-          <MeasureTitle>Peso</MeasureTitle>
-          <MeasureInput keyboardType="numeric">{salePrice}</MeasureInput>
-          <MeasureUnity> kg</MeasureUnity>
-        </MeasureContainer>
-        <Divider />
+        <Measures>
+          <MeasureContainer>
+            <MeasureTitle>Peso</MeasureTitle>
+            <MeasureInput keyboardType="numeric">{salePrice}</MeasureInput>
+            <MeasureUnity> kg</MeasureUnity>
+          </MeasureContainer>
+          <Divider />
 
-        <MeasureContainer>
-          <MeasureTitle>Altura</MeasureTitle>
-          <MeasureInput
-            keyboardType="numeric"
-            placeholder={formatPrice(promotionalPrice)}>
-            {formatPrice(promotionalPrice)}
-          </MeasureInput>
-          <MeasureUnity>cm</MeasureUnity>
-        </MeasureContainer>
-        <Divider />
+          <MeasureContainer>
+            <MeasureTitle>Altura</MeasureTitle>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={formatPrice(promotionalPrice)}>
+              {formatPrice(promotionalPrice)}
+            </MeasureInput>
+            <MeasureUnity>cm</MeasureUnity>
+          </MeasureContainer>
+          <Divider />
 
-        <MeasureContainer>
-          <MeasureTitle>Largura</MeasureTitle>
-          <MeasureInput keyboardType="numeric" placeholder={'12'}>
-            {dimensions.height}
-          </MeasureInput>
-          <MeasureUnity>cm</MeasureUnity>
-        </MeasureContainer>
-        <Divider />
+          <MeasureContainer>
+            <MeasureTitle>Largura</MeasureTitle>
+            <MeasureInput keyboardType="numeric" placeholder={'12'}>
+              {dimensions.height}
+            </MeasureInput>
+            <MeasureUnity>cm</MeasureUnity>
+          </MeasureContainer>
+          <Divider />
 
-        <MeasureContainer>
-          <MeasureTitle>Profundidade</MeasureTitle>
-          <MeasureInput keyboardType="numeric">{dimensions.width}</MeasureInput>
-          <MeasureUnity>cm</MeasureUnity>
-        </MeasureContainer>
-        <Divider />
-      </Measures>
-
+          <MeasureContainer>
+            <MeasureTitle>Profundidade</MeasureTitle>
+            <MeasureInput keyboardType="numeric">
+              {dimensions.width}
+            </MeasureInput>
+            <MeasureUnity>cm</MeasureUnity>
+          </MeasureContainer>
+        </Measures>
+      </Container>
       <Edit>
-        <TextEdit>Salvar alterações</TextEdit>
+        <Divider />
+        <EditButton activeOpacity={0.5}>
+          <TextEdit>Salvar alterações</TextEdit>
+        </EditButton>
       </Edit>
     </Wrapper>
   );
