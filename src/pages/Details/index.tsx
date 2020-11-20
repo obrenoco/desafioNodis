@@ -33,14 +33,16 @@ import {
 
 export default function Details({
   route: {
-    params: {name, salePrice, imageUrl, promotionalPrice, dimensions},
+    params: {name, salePrice, imageUrl, promotionalPrice, dimensions, stock},
   },
 }: RoutesDataProps) {
-  const [stock, setStock] = useState(0);
+  const [stockVal, setStockVal] = useState(0);
+  const increaseStock = () => setStockVal((prevStockVal) => prevStockVal + 1);
 
-  const increaseStock = () => setStock((prevStock) => prevStock + 1);
   const decreaseStock = () =>
-    setStock((prevStock) => (prevStock > 0 ? prevStock - 1 : prevStock));
+    setStockVal((prevStockVal) =>
+      prevStockVal > 0 ? prevStockVal - 1 : prevStockVal,
+    );
 
   return (
     <Wrapper>
@@ -58,7 +60,11 @@ export default function Details({
         <Stock>
           <StockTitle>Estoque:</StockTitle>
           <StockContainer>
-            <StockInput placeholder={`${stock}`} keyboardType={'number-pad'} />
+            <StockInput
+              placeholder={'0'}
+              keyboardType={'number-pad'}
+              value={`${stockVal}`}
+            />
 
             <StockButton
               onPress={decreaseStock}
@@ -75,37 +81,36 @@ export default function Details({
         <Prices>
           <PriceContainer>
             <PriceTitle>Preço de venda</PriceTitle>
-            <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+            <PriceInput
+              keyboardType={'number-pad'}
+              placeholder={'R$ 0,00'}
+              value={formatPrice(salePrice)}
+            />
           </PriceContainer>
 
           <PriceContainer>
             <PriceTitle>Preço promocional</PriceTitle>
-            <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+            <PriceInput
+              keyboardType={'number-pad'}
+              placeholder={'R$ 0,00'}
+              value={formatPrice(promotionalPrice)}
+            />
           </PriceContainer>
         </Prices>
 
         <Measures>
           <MeasureContainer>
             <MeasureTitle>Peso</MeasureTitle>
-            <MeasureInput keyboardType="numeric">{salePrice}</MeasureInput>
+            <MeasureInput keyboardType="numeric" placeholder={'1000'}>
+              {dimensions.weight}
+            </MeasureInput>
             <MeasureUnity> kg</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Altura</MeasureTitle>
-            <MeasureInput
-              keyboardType="numeric"
-              placeholder={formatPrice(promotionalPrice)}>
-              {formatPrice(promotionalPrice)}
-            </MeasureInput>
-            <MeasureUnity>cm</MeasureUnity>
-          </MeasureContainer>
-          <Divider />
-
-          <MeasureContainer>
-            <MeasureTitle>Largura</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'12'}>
+            <MeasureInput keyboardType="numeric" placeholder={'100'}>
               {dimensions.height}
             </MeasureInput>
             <MeasureUnity>cm</MeasureUnity>
@@ -113,9 +118,18 @@ export default function Details({
           <Divider />
 
           <MeasureContainer>
-            <MeasureTitle>Profundidade</MeasureTitle>
-            <MeasureInput keyboardType="numeric">
+            <MeasureTitle>Largura</MeasureTitle>
+            <MeasureInput keyboardType="numeric" placeholder={'100'}>
               {dimensions.width}
+            </MeasureInput>
+            <MeasureUnity>cm</MeasureUnity>
+          </MeasureContainer>
+          <Divider />
+
+          <MeasureContainer>
+            <MeasureTitle>Profundidade</MeasureTitle>
+            <MeasureInput keyboardType="numeric" placeholder={'100'}>
+              {dimensions.depth}
             </MeasureInput>
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
