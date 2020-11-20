@@ -34,14 +34,15 @@ import formatWeight from '../../utils/formatWeight';
 
 export default function Details({
   route: {
-    params: {name, salePrice, imageUrl, promotionalPrice, dimensions, stock},
+    params: {name, imageUrl, salePrice, promotionalPrice, dimensions, stock},
   },
 }: RoutesDataProps) {
-  const [stockVal = stock, setStockVal] = useState(stock);
-  const increaseStock = () => setStockVal((prevStockVal) => prevStockVal + 1);
+  const [stockAvailable = stock, setStockAvailable] = useState(stock);
+  const increaseStock = () =>
+    setStockAvailable((prevStockAvailable) => prevStockAvailable + 1);
   const decreaseStock = () =>
-    setStockVal((prevStockVal) =>
-      prevStockVal > 0 ? prevStockVal - 1 : prevStockVal,
+    setStockAvailable((prevStockAvailable) =>
+      prevStockAvailable > 0 ? prevStockAvailable - 1 : prevStockAvailable,
     );
 
   return (
@@ -63,7 +64,7 @@ export default function Details({
             <StockInput
               placeholder={'0'}
               keyboardType={'number-pad'}
-              value={`${stockVal}`}
+              value={`${stockAvailable}`}
             />
 
             <StockButton
@@ -82,7 +83,7 @@ export default function Details({
           <PriceContainer>
             <PriceTitle>Preço de venda</PriceTitle>
             <PriceInput
-              keyboardType={'number-pad'}
+              keyboardType="numeric"
               placeholder={'R$ 0,00'}
               value={formatPrice(salePrice)}
             />
@@ -91,7 +92,7 @@ export default function Details({
           <PriceContainer>
             <PriceTitle>Preço promocional</PriceTitle>
             <PriceInput
-              keyboardType={'number-pad'}
+              keyboardType="numeric"
               placeholder={'R$ 0,00'}
               value={formatPrice(promotionalPrice)}
             />
