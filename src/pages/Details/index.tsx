@@ -15,6 +15,10 @@ import {
   StockContainer,
   StockInput,
   StockButton,
+  Prices,
+  PriceContainer,
+  PriceTitle,
+  PriceInput,
   Measures,
   MeasureContainer,
   Divider,
@@ -54,6 +58,18 @@ export default function Details({
           </StockButton>
         </StockContainer>
       </Stock>
+
+      <Prices>
+        <PriceContainer>
+          <PriceTitle>Preço de venda</PriceTitle>
+          <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+        </PriceContainer>
+
+        <PriceContainer>
+          <PriceTitle>Preço promocional</PriceTitle>
+          <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+        </PriceContainer>
+      </Prices>
 
       <Measures>
         <MeasureContainer>

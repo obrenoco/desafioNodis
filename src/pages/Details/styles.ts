@@ -48,6 +48,7 @@ export const StockInput = styled.TextInput`
   border-width: 1px;
   width: 92px;
   border-radius: 3px;
+  padding-left: 13px;
 `;
 export const StockButton = styled.TouchableOpacity`
   background-color: #f9fafb;
@@ -56,10 +57,27 @@ export const StockButton = styled.TouchableOpacity`
   padding: 12px 45px;
 `;
 
-export const Price = styled.Text`
-  font-family: 'Rubik-Regular';
-  font-size: 30px;
-  margin-top: 10px;
+export const Prices = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const PriceContainer = styled.View`
+  margin: 10px 0;
+`;
+
+export const PriceTitle = styled.Text`
+  font-family: 'Rubik-Medium';
+  color: #212b36;
+  margin-bottom: 4px;
+  font-size: 15px;
+`;
+
+export const PriceInput = styled.TextInput`
+  border-color: #c4cdd5;
+  border-width: 1px;
+  width: 170px;
+  padding-left: 13px;
 `;
 
 export const Measures = styled.View`
