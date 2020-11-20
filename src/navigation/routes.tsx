@@ -21,7 +21,11 @@ function Route() {
         <Stack.Screen
           name="Details"
           component={DetailsScreen}
-          options={{headerTitle: 'Produtos'}}
+          options={{
+            headerShown: true,
+            headerTitle: 'Produtos',
+            headerStyle: {elevation: 0},
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
