@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {RoutesDataProps} from '../../@types/dataProps';
 import formatPrice from '../../utils/formatPrice';
 
@@ -36,6 +36,12 @@ export default function Details({
     params: {name, salePrice, imageUrl, promotionalPrice, dimensions},
   },
 }: RoutesDataProps) {
+  const [stock, setStock] = useState(0);
+
+  const increaseStock = () => setStock((prevStock) => prevStock + 1);
+  const decreaseStock = () =>
+    setStock((prevStock) => (prevStock > 0 ? prevStock - 1 : prevStock));
+
   return (
     <Wrapper>
       <Container>
@@ -52,11 +58,15 @@ export default function Details({
         <Stock>
           <StockTitle>Estoque:</StockTitle>
           <StockContainer>
-            <StockInput placeholder={'0'} keyboardType={'number-pad'} />
-            <StockButton activeOpacity={0.5} style={{marginLeft: 'auto'}}>
+            <StockInput placeholder={`${stock}`} keyboardType={'number-pad'} />
+
+            <StockButton
+              onPress={decreaseStock}
+              activeOpacity={0.5}
+              style={{marginLeft: 'auto'}}>
               <Icon name="divide-circle" size={24} color="red" />
             </StockButton>
-            <StockButton activeOpacity={0.5}>
+            <StockButton onPress={increaseStock} activeOpacity={0.5}>
               <Icon name="plus-circle" size={24} color="green" />
             </StockButton>
           </StockContainer>
@@ -111,6 +121,7 @@ export default function Details({
           </MeasureContainer>
         </Measures>
       </Container>
+
       <Edit>
         <Divider />
         <EditButton activeOpacity={0.5}>
