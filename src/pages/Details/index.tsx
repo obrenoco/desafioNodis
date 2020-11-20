@@ -8,6 +8,8 @@ import formatPrice from '../../utils/formatPrice';
 import BuyButtons from './components/BuyButtons';
 import InfoTitle from './components/InfoTitle';
 
+import Icon from 'react-native-vector-icons/Feather';
+
 import {
   Wrapper,
   ImageFrame,
@@ -15,7 +17,9 @@ import {
   ProductTitle,
   Stock,
   StockTitle,
-  Price,
+  StockInputs,
+  InputStock,
+  ButtonStock,
   InfoContainer,
   InfoDescription,
   Item,
@@ -62,10 +66,18 @@ export default function Details({
             }}
           />
         </ImageFrame>
-        <Price>{formatPrice(salePrice)}</Price>
 
         <Stock>
-          <StockTitle>Estoque disponível</StockTitle>
+          <StockTitle>Estoque:</StockTitle>
+          <StockInputs>
+            <InputStock placeholder={'0'} keyboardType={'number-pad'} />
+            <ButtonStock activeOpacity={0.5} style={{marginLeft: 'auto'}}>
+              <Icon name="divide-circle" size={24} color="red" />
+            </ButtonStock>
+            <ButtonStock activeOpacity={0.5}>
+              <Icon name="plus-circle" size={24} color="green" />
+            </ButtonStock>
+          </StockInputs>
         </Stock>
 
         <BuyButtons />

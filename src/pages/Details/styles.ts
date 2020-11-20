@@ -26,15 +26,34 @@ export const ProductTitle = styled.Text`
 `;
 
 export const Stock = styled.View`
-  margin: 30px 0;
+  margin: 14px 0;
 `;
 
 export const StockTitle = styled.Text`
   font-family: 'Rubik-Medium';
-  margin-bottom: 10px;
+  color: #212b36;
+  margin-bottom: 4px;
+  font-size: 15px;
 `;
 
-export const Category = styled.Text``;
+export const StockInputs = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+export const InputStock = styled.TextInput`
+  font-family: 'Rubik-Regular';
+  font-size: 15px;
+  border-color: #c4cdd5;
+  border-width: 1px;
+  width: 92px;
+  border-radius: 3px;
+`;
+export const ButtonStock = styled.TouchableOpacity`
+  background-color: #f9fafb;
+  border-color: #c4cdd5;
+  border-width: 1px;
+  padding: 12px 45px;
+`;
 
 export const Price = styled.Text`
   font-family: 'Rubik-Regular';
