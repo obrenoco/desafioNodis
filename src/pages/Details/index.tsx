@@ -21,7 +21,7 @@ import {
   MeasureTitle,
   MeasureInput,
   MeasureUnity,
-  ButtonEdit,
+  Edit,
   TextEdit,
 } from './styles';
 
@@ -91,9 +91,9 @@ export default function Details({
         <Divider />
       </Measures>
 
-      <ButtonEdit>
+      <Edit>
         <TextEdit>Salvar alterações</TextEdit>
-      </ButtonEdit>
+      </Edit>
     </Wrapper>
   );
 }

@@ -104,7 +104,7 @@ export const MeasureUnity = styled.Text`
   margin-left: 9px;
 `;
 
-export const ButtonEdit = styled.TouchableOpacity`
+export const Edit = styled.TouchableOpacity`
   align-self: flex-end;
   margin: 9px 16px;
   align-items: center;
