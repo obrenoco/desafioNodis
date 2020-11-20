@@ -30,10 +30,11 @@ import {
   EditButton,
   TextEdit,
 } from './styles';
+import formatWeight from '../../utils/formatWeight';
 
 export default function Details({
   route: {
-    params: {name, salePrice, imageUrl, promotionalPrice, dimensions, stock},
+    params: {name, salePrice, imageUrl, promotionalPrice, dimensions},
   },
 }: RoutesDataProps) {
   const [stockVal, setStockVal] = useState(0);
@@ -102,7 +103,7 @@ export default function Details({
           <MeasureContainer>
             <MeasureTitle>Peso</MeasureTitle>
             <MeasureInput keyboardType="numeric" placeholder={'1000'}>
-              {dimensions.weight}
+              {formatWeight(dimensions.weight)}
             </MeasureInput>
             <MeasureUnity> kg</MeasureUnity>
           </MeasureContainer>
