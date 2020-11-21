@@ -3,14 +3,19 @@ import styled from 'styled-components/native';
 export const Wrapper = styled.View`
   background-color: #ffffff;
   flex: 1;
-  padding: 6px 16px;
+  padding: 6px 16px 18px;
 `;
 
 export const Title = styled.Text`
-  font-family: 'Rubik-Medium';
+  font-family: 'Rubik-Regular';
   color: #333333;
   font-size: 21px;
   margin-top: 30px;
+`;
+
+export const Loading = styled.ActivityIndicator`
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Container = styled.View`
@@ -69,4 +74,12 @@ export const ItemValue = styled.Text`
   font-family: 'Rubik-Regular';
   color: #212b36;
   font-size: 13px;
+`;
+
+export const ItemDiscount = styled.Text`
+  font-family: 'Rubik-Regular';
+  color: #637381;
+  font-size: 13px;
+  text-decoration: line-through;
+  margin-right: 4px;
 `;
