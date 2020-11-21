@@ -40,7 +40,6 @@ export const StockTitle = styled.Text`
 
 export const StockContainer = styled.View`
   flex-direction: row;
-  align-items: center;
 `;
 
 export const StockInput = styled.TextInput`

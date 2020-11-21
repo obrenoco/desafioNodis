@@ -32,7 +32,6 @@ function Route() {
             headerTitleStyle: {
               color: '#637381',
               fontFamily: 'Rubik-Regular',
-              marginLeft: 0,
             },
           }}
         />
