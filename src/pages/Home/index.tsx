@@ -20,6 +20,7 @@ import {
   Price,
   Amount,
   ItemValue,
+  ItemDiscount,
 } from './styles';
 
 const GET_SKU = gql`
@@ -71,6 +72,9 @@ const ProductList: DataProps | any = () => {
           <ItemTitle>{skus.name}</ItemTitle>
           <Price>
             <Amount>1 X</Amount>
+            {skus.promotionalPrice !== skus.salePrice && (
+              <ItemDiscount>{formatPrice(skus.promotionalPrice)}</ItemDiscount>
+            )}
             <ItemValue>{formatPrice(skus.salePrice)}</ItemValue>
           </Price>
         </Info>

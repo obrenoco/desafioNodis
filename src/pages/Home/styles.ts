@@ -74,4 +74,12 @@ export const ItemValue = styled.Text`
   font-family: 'Rubik-Regular';
   color: #212b36;
   font-size: 13px;
+  margin-left: 6px;
+`;
+
+export const ItemDiscount = styled.Text`
+  font-family: 'Rubik-Regular';
+  color: #637381;
+  font-size: 13px;
+  text-decoration: line-through;
 `;
