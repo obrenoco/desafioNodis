@@ -25,6 +25,10 @@ function Route() {
             headerShown: true,
             headerTitle: 'Produtos',
             headerStyle: {elevation: 0},
+            headerTitleStyle: {
+              color: '#637381',
+              fontFamily: 'Rubik-Regular',
+            },
           }}
         />
       </Stack.Navigator>
