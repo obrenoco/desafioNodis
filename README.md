@@ -12,8 +12,9 @@
 </p>
 
 <p align="center">
-  <img src ="https://media.giphy.com/media/pU5bBW7txXipUunqSI/giphy.gif" width="150px"  />
-  <img src ="https://media.giphy.com/media/7yVOqwPqTxEyBAjZ3j/giphy.gif" width="150px"  />
+  <img src ="https://i.imgur.com/qD3u3mF.png" width="170px"  />
+  <img src ="https://media.giphy.com/media/ttmLmrkg7lrHnq8g6t/giphy.gif" width="150px"  />
+  
 </p>
 
 
@@ -38,7 +39,7 @@ O desafio consistem em criar uma aplicação mobile (React Native) que permita a
 
 - Na home, ao clicar em um produto, o usuário deve ser redirecionado para a página de detalhe desse produto.
 
-- Na tela de detalhe do produto, o usuário deve poder editar todos os campos do produto. Essa mudança deve refletir na listagem, caso seja necessário.
+- Na tela de detalhe do produto, o usuário deve poder editar o estoque, os preços do produto e a cubagem (dimensões do produto). Essa mudança deve refletir na listagem, caso seja necessário.
 
 <br />
 

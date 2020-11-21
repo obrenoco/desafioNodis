@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from '../pages/Home';
 import DetailsScreen from '../pages/Details';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,18 @@ function Route() {
         <Stack.Screen
           name="Details"
           component={DetailsScreen}
-          options={{headerTitle: 'Produtos'}}
+          options={{
+            headerShown: true,
+            headerBackImage: () => (
+              <Icon name="left" style={{color: '#637381'}} />
+            ),
+            headerTitle: 'Produtos',
+            headerStyle: {elevation: 0},
+            headerTitleStyle: {
+              color: '#637381',
+              fontFamily: 'Rubik-Regular',
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
