@@ -20,8 +20,8 @@ import {
 } from './styles';
 import {DataProps} from '../../@types/dataProps';
 
-const API_DATA = gql`
-  query GetRates {
+const GET_SKU = gql`
+  query GetSku {
     allSkus {
       id
       name
@@ -37,7 +37,7 @@ const API_DATA = gql`
 
 const ProductList: DataProps | any = () => {
   const navigation = useNavigation();
-  const {loading, error, data} = useQuery(API_DATA);
+  const {loading, error, data} = useQuery(GET_SKU);
 
   if (loading) {
     return (
