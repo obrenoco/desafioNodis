@@ -11,7 +11,7 @@ export const Container = styled.View`
 export const Title = styled.Text`
   font-family: 'Rubik-Regular';
   color: #333333;
-  margin: 7px 0 15px;
+  margin: 7px 0 5px;
   font-size: 21px;
   line-height: 24px;
 `;
