@@ -72,10 +72,16 @@ const ProductList: DataProps | any = () => {
           <ItemTitle>{skus.name}</ItemTitle>
           <Price>
             <Amount>1 X</Amount>
-            {skus.promotionalPrice !== skus.salePrice && (
-              <ItemDiscount>{formatPrice(skus.promotionalPrice)}</ItemDiscount>
+            {skus.promotionalPrice !== skus.salePrice ? (
+              <>
+                <ItemDiscount>
+                  {formatPrice(skus.promotionalPrice)}
+                </ItemDiscount>
+                <ItemValue>por {formatPrice(skus.salePrice)}</ItemValue>
+              </>
+            ) : (
+              <ItemValue>{formatPrice(skus.salePrice)}</ItemValue>
             )}
-            <ItemValue>{formatPrice(skus.salePrice)}</ItemValue>
           </Price>
         </Info>
       </Container>
