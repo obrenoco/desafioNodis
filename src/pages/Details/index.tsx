@@ -57,10 +57,25 @@ export default function Details({
     params: {name, imageUrl, salePrice, promotionalPrice, dimensions, stock},
   },
 }: RoutesDataProps) {
-  const [updateSku, {data}] = useMutation(UPDATE_SKU);
+  // const [updateSku, {data}] = useMutation(UPDATE_SKU);
+
+  const [salePriceVal = salePrice, setSalePriceVal] = React.useState(
+    salePriceVal,
+  );
+  const [promoPrice = promotionalPrice, setPromoPrice] = React.useState(
+    promoPrice,
+  );
+  const [weight = dimensions.weight, setWeight] = React.useState(weight);
+  const [height = dimensions.height, setHeight] = React.useState(height);
+  const [width = dimensions.width, setWidth] = React.useState(width);
+  const [depth = dimensions.depth, setDepth] = React.useState(depth);
 
   const handleEdit = () => {
-    Alert.alert('Salvas', 'Suas alterações foram salvas.');
+    Alert.alert(
+      'Salvas',
+      `
+      -Stock ${stock} -Sale ${salePriceVal} - Promo ${promoPrice} - Weight ${weight} - Width ${width} - Depth: ${depth}  - `,
+    );
   };
 
   const [stockAvailable = stock, setStockAvailable] = useState(stock);
@@ -91,6 +106,7 @@ export default function Details({
               placeholder={'0'}
               keyboardType={'number-pad'}
               defaultValue={`${stockAvailable}`}
+              onChangeText={setStockAvailable}
             />
 
             <StockButton
@@ -111,7 +127,8 @@ export default function Details({
             <PriceInput
               keyboardType="numeric"
               placeholder={'R$ 0,00'}
-              defaultValue={formatPrice(salePrice)}
+              defaultValue={`${formatPrice(salePriceVal)}`}
+              onChangeText={setSalePriceVal}
             />
           </PriceContainer>
 
@@ -120,7 +137,8 @@ export default function Details({
             <PriceInput
               keyboardType="numeric"
               placeholder={'R$ 0,00'}
-              defaultValue={formatPrice(promotionalPrice)}
+              defaultValue={`${formatPrice(promoPrice)}`}
+              onChangeText={setPromoPrice}
             />
           </PriceContainer>
         </Prices>
@@ -131,7 +149,8 @@ export default function Details({
             <MeasureInput
               keyboardType="numeric"
               placeholder={'1000'}
-              defaultValue={`${formatWeight(dimensions.height)}`}
+              defaultValue={`${formatWeight(weight)}`}
+              onChangeText={setWeight}
             />
             <MeasureUnity> kg</MeasureUnity>
           </MeasureContainer>
@@ -142,7 +161,8 @@ export default function Details({
             <MeasureInput
               keyboardType="numeric"
               placeholder={'100'}
-              defaultValue={`${dimensions.height}`}
+              defaultValue={`${height}`}
+              onChangeText={setHeight}
             />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
@@ -153,7 +173,8 @@ export default function Details({
             <MeasureInput
               keyboardType="numeric"
               placeholder={'100'}
-              defaultValue={`${dimensions.width}`}
+              defaultValue={`${width}`}
+              onChangeText={setWidth}
             />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
@@ -164,7 +185,8 @@ export default function Details({
             <MeasureInput
               keyboardType="numeric"
               placeholder={'100'}
-              defaultValue={`${dimensions.depth}`}
+              defaultValue={`${depth}`}
+              onChangeText={setDepth}
             />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
