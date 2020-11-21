@@ -87,9 +87,11 @@ export default function Details({
         <Stock>
           <StockTitle>Estoque:</StockTitle>
           <StockContainer>
-            <StockInput placeholder={'0'} keyboardType={'number-pad'}>
-              {`${stockAvailable}`}
-            </StockInput>
+            <StockInput
+              placeholder={'0'}
+              keyboardType={'number-pad'}
+              defaultValue={`${stockAvailable}`}
+            />
 
             <StockButton
               onPress={decreaseStock}
@@ -106,52 +108,64 @@ export default function Details({
         <Prices>
           <PriceContainer>
             <PriceTitle>Preço de venda</PriceTitle>
-            <PriceInput keyboardType="numeric" placeholder={'R$ 0,00'}>
-              {formatPrice(salePrice)}
-            </PriceInput>
+            <PriceInput
+              keyboardType="numeric"
+              placeholder={'R$ 0,00'}
+              defaultValue={formatPrice(salePrice)}
+            />
           </PriceContainer>
 
           <PriceContainer>
             <PriceTitle>Preço promocional</PriceTitle>
-            <PriceInput keyboardType="numeric" placeholder={'R$ 0,00'}>
-              {formatPrice(promotionalPrice)}
-            </PriceInput>
+            <PriceInput
+              keyboardType="numeric"
+              placeholder={'R$ 0,00'}
+              defaultValue={formatPrice(promotionalPrice)}
+            />
           </PriceContainer>
         </Prices>
 
         <Measures>
           <MeasureContainer>
             <MeasureTitle>Peso</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'1000'}>
-              {formatWeight(dimensions.weight)}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'1000'}
+              defaultValue={`${formatWeight(dimensions.height)}`}
+            />
             <MeasureUnity> kg</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Altura</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'100'}>
-              {dimensions.height}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'100'}
+              defaultValue={`${dimensions.height}`}
+            />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Largura</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'100'}>
-              {dimensions.width}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'100'}
+              defaultValue={`${dimensions.width}`}
+            />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Profundidade</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'100'}>
-              {dimensions.depth}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'100'}
+              defaultValue={`${dimensions.depth}`}
+            />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
         </Measures>
