@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {RoutesDataProps} from '../../@types/dataProps';
+import {gql, useMutation} from '@apollo/client';
 import formatPrice from '../../utils/formatPrice';
 
 import Icon from 'react-native-vector-icons/Feather';
@@ -30,12 +31,46 @@ import {
   EditButton,
   TextEdit,
 } from './styles';
+import formatWeight from '../../utils/formatWeight';
+import {Alert} from 'react-native';
+
+const UPDATE_SKU = gql`
+  mutation UpdateSku(
+    $id: Number!
+    $salePrice: String!
+    $promotionalPrice: String!
+  ) {
+    updateSku(
+      id: $id
+      salePrice: $salePrice
+      promotionalPrice: $promotionalPrice
+    ) {
+      id
+      salePrice
+      promotionalPrice
+    }
+  }
+`;
 
 export default function Details({
   route: {
-    params: {name, salePrice, imageUrl, promotionalPrice, dimensions},
+    params: {name, imageUrl, salePrice, promotionalPrice, dimensions, stock},
   },
 }: RoutesDataProps) {
+  const [updateSku, {data}] = useMutation(UPDATE_SKU);
+
+  const handleEdit = () => {
+    Alert.alert('Salvas', 'Suas alterações foram salvas.');
+  };
+
+  const [stockAvailable = stock, setStockAvailable] = useState(stock);
+  const increaseStock = () =>
+    setStockAvailable((prevStockAvailable) => prevStockAvailable + 1);
+  const decreaseStock = () =>
+    setStockAvailable((prevStockAvailable) =>
+      prevStockAvailable > 0 ? prevStockAvailable - 1 : prevStockAvailable,
+    );
+
   return (
     <Wrapper>
       <Container>
@@ -52,11 +87,17 @@ export default function Details({
         <Stock>
           <StockTitle>Estoque:</StockTitle>
           <StockContainer>
-            <StockInput placeholder={'0'} keyboardType={'number-pad'} />
-            <StockButton activeOpacity={0.5} style={{marginLeft: 'auto'}}>
+            <StockInput placeholder={'0'} keyboardType={'number-pad'}>
+              {`${stockAvailable}`}
+            </StockInput>
+
+            <StockButton
+              onPress={decreaseStock}
+              activeOpacity={0.5}
+              style={{marginLeft: 'auto'}}>
               <Icon name="divide-circle" size={24} color="red" />
             </StockButton>
-            <StockButton activeOpacity={0.5}>
+            <StockButton onPress={increaseStock} activeOpacity={0.5}>
               <Icon name="plus-circle" size={24} color="green" />
             </StockButton>
           </StockContainer>
@@ -65,37 +106,32 @@ export default function Details({
         <Prices>
           <PriceContainer>
             <PriceTitle>Preço de venda</PriceTitle>
-            <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+            <PriceInput keyboardType="numeric" placeholder={'R$ 0,00'}>
+              {formatPrice(salePrice)}
+            </PriceInput>
           </PriceContainer>
 
           <PriceContainer>
             <PriceTitle>Preço promocional</PriceTitle>
-            <PriceInput keyboardType={'number-pad'} placeholder={'R$ 20,00'} />
+            <PriceInput keyboardType="numeric" placeholder={'R$ 0,00'}>
+              {formatPrice(promotionalPrice)}
+            </PriceInput>
           </PriceContainer>
         </Prices>
 
         <Measures>
           <MeasureContainer>
             <MeasureTitle>Peso</MeasureTitle>
-            <MeasureInput keyboardType="numeric">{salePrice}</MeasureInput>
+            <MeasureInput keyboardType="numeric" placeholder={'1000'}>
+              {formatWeight(dimensions.weight)}
+            </MeasureInput>
             <MeasureUnity> kg</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Altura</MeasureTitle>
-            <MeasureInput
-              keyboardType="numeric"
-              placeholder={formatPrice(promotionalPrice)}>
-              {formatPrice(promotionalPrice)}
-            </MeasureInput>
-            <MeasureUnity>cm</MeasureUnity>
-          </MeasureContainer>
-          <Divider />
-
-          <MeasureContainer>
-            <MeasureTitle>Largura</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'12'}>
+            <MeasureInput keyboardType="numeric" placeholder={'100'}>
               {dimensions.height}
             </MeasureInput>
             <MeasureUnity>cm</MeasureUnity>
@@ -103,17 +139,27 @@ export default function Details({
           <Divider />
 
           <MeasureContainer>
-            <MeasureTitle>Profundidade</MeasureTitle>
-            <MeasureInput keyboardType="numeric">
+            <MeasureTitle>Largura</MeasureTitle>
+            <MeasureInput keyboardType="numeric" placeholder={'100'}>
               {dimensions.width}
+            </MeasureInput>
+            <MeasureUnity>cm</MeasureUnity>
+          </MeasureContainer>
+          <Divider />
+
+          <MeasureContainer>
+            <MeasureTitle>Profundidade</MeasureTitle>
+            <MeasureInput keyboardType="numeric" placeholder={'100'}>
+              {dimensions.depth}
             </MeasureInput>
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
         </Measures>
       </Container>
+
       <Edit>
         <Divider />
-        <EditButton activeOpacity={0.5}>
+        <EditButton onPress={handleEdit} activeOpacity={0.5}>
           <TextEdit>Salvar alterações</TextEdit>
         </EditButton>
       </Edit>
