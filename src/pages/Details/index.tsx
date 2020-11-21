@@ -59,32 +59,34 @@ export default function Details({
 }: RoutesDataProps) {
   // const [updateSku, {data}] = useMutation(UPDATE_SKU);
 
-  const [salePriceVal = salePrice, setSalePriceVal] = React.useState(
-    salePriceVal,
-  );
+  const [stockAvailable = stock, setStockAvailable] = useState(stock);
+  const increaseStock = () =>
+    setStockAvailable((prevStockAvailable) => prevStockAvailable + 1);
+  const decreaseStock = () => {
+    setStockAvailable((prevStockAvailable) =>
+      prevStockAvailable > 0 ? prevStockAvailable - 1 : prevStockAvailable,
+    );
+  };
+  const [salePriceVal = salePrice, setSalePriceVal] = React.useState(salePrice);
   const [promoPrice = promotionalPrice, setPromoPrice] = React.useState(
-    promoPrice,
+    promotionalPrice,
   );
-  const [weight = dimensions.weight, setWeight] = React.useState(weight);
-  const [height = dimensions.height, setHeight] = React.useState(height);
-  const [width = dimensions.width, setWidth] = React.useState(width);
-  const [depth = dimensions.depth, setDepth] = React.useState(depth);
+  const [weight = dimensions.weight, setWeight] = React.useState(
+    dimensions.weight,
+  );
+  const [height = dimensions.height, setHeight] = React.useState(
+    dimensions.height,
+  );
+  const [width = dimensions.width, setWidth] = React.useState(dimensions.width);
+  const [depth = dimensions.depth, setDepth] = React.useState(dimensions.depth);
 
   const handleEdit = () => {
     Alert.alert(
       'Salvas',
       `
-      -Stock ${stock} -Sale ${salePriceVal} - Promo ${promoPrice} - Weight ${weight} - Width ${width} - Depth: ${depth}  - `,
+      -Stock ${stockAvailable} -Sale ${salePriceVal} - Promo ${promoPrice} - Weight ${weight} - Width ${width} - Depth: ${depth}  - `,
     );
   };
-
-  const [stockAvailable = stock, setStockAvailable] = useState(stock);
-  const increaseStock = () =>
-    setStockAvailable((prevStockAvailable) => prevStockAvailable + 1);
-  const decreaseStock = () =>
-    setStockAvailable((prevStockAvailable) =>
-      prevStockAvailable > 0 ? prevStockAvailable - 1 : prevStockAvailable,
-    );
 
   return (
     <Wrapper>
