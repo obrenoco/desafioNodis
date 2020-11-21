@@ -56,7 +56,7 @@ export default function Details({
   route: {
     params: {name, imageUrl, salePrice, promotionalPrice, dimensions, stock},
   },
-}: RoutesDataProps) {
+}: RoutesDataProps | any) {
   // const [updateSku, {data}] = useMutation(UPDATE_SKU);
 
   const [stockAvailable = stock, setStockAvailable] = useState(stock);
