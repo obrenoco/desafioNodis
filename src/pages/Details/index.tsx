@@ -38,10 +38,10 @@ import unformatPrice from '../../utils/unformatPrice';
 const UPDATE_SKU = gql`
   mutation updateSku(
     $id: ID!
+    $stock: Int
     $salePrice: String
     $promotionalPrice: String
     $dimensions: JSON
-    $stock: Int
   ) {
     updateSku(
       id: $id
@@ -108,10 +108,7 @@ export default function Details({
       },
     });
 
-    Alert.alert(
-      'Salvas',
-      `Stock ${stockAvailable} - Sale ${salePriceVal} - Promo ${promoPrice} -Height ${height} Weight ${weight} - Width ${width} - Depth: ${depth}`,
-    );
+    Alert.alert('Salvas', 'Suas mudanças foram salvas com sucesso !');
   };
 
   return (
