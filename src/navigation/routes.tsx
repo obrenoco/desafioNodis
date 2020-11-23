@@ -29,6 +29,9 @@ function Route() {
             ),
             headerTitle: 'Produtos',
             headerStyle: {elevation: 0},
+            headerTitleContainerStyle: {
+              left: 30,
+            },
             headerTitleStyle: {
               color: '#637381',
               fontFamily: 'Rubik-Regular',
