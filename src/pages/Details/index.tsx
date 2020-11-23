@@ -35,29 +35,28 @@ import formatWeight from '../../utils/formatWeight';
 import {Alert} from 'react-native';
 
 const UPDATE_SKU = gql`
-  mutation UpdateSku(
-    $id: Number!
-    $salePrice: String!
-    $promotionalPrice: String!
-  ) {
-    updateSku(
-      id: $id
-      salePrice: $salePrice
-      promotionalPrice: $promotionalPrice
-    ) {
+  mutation updateSku($id: ID!, $stock: Int) {
+    updateSku(id: $id, stock: $stock) {
       id
-      salePrice
-      promotionalPrice
+      stock
     }
   }
 `;
 
 export default function Details({
   route: {
-    params: {name, imageUrl, salePrice, promotionalPrice, dimensions, stock},
+    params: {
+      id,
+      name,
+      imageUrl,
+      salePrice,
+      promotionalPrice,
+      dimensions,
+      stock,
+    },
   },
 }: RoutesDataProps | any) {
-  // const [updateSku, {data}] = useMutation(UPDATE_SKU);
+  const [updateSku] = useMutation(UPDATE_SKU);
 
   const [stockAvailable = stock, setStockAvailable] = useState(stock);
   const increaseStock = () =>
@@ -81,10 +80,11 @@ export default function Details({
   const [depth = dimensions.depth, setDepth] = React.useState(dimensions.depth);
 
   const handleEdit = () => {
+    updateSku({variables: {id: id, stock: stockAvailable}});
+
     Alert.alert(
       'Salvas',
-      `
-      -Stock ${stockAvailable} -Sale ${salePriceVal} - Promo ${promoPrice} - Weight ${weight} - Width ${width} - Depth: ${depth}  - `,
+      `Stock ${stockAvailable} - Sale ${salePriceVal} - Promo ${promoPrice} - Weight ${weight} - Width ${width} - Depth: ${depth}`,
     );
   };
 
