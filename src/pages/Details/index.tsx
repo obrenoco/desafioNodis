@@ -33,12 +33,27 @@ import {
 } from './styles';
 import formatWeight from '../../utils/formatWeight';
 import {Alert} from 'react-native';
+import unformatPrice from '../../utils/unformatPrice';
 
 const UPDATE_SKU = gql`
-  mutation updateSku($id: ID!, $stock: Int) {
-    updateSku(id: $id, stock: $stock) {
+  mutation updateSku(
+    $id: ID!
+    $salePrice: String
+    $promotionalPrice: String
+    $dimensions: JSON
+    $stock: Int
+  ) {
+    updateSku(
+      id: $id
+      stock: $stock
+      salePrice: $salePrice
+      promotionalPrice: $promotionalPrice
+      package: $dimensions
+    ) {
       id
       stock
+      salePrice
+      package
     }
   }
 `;
@@ -59,6 +74,15 @@ export default function Details({
   const [updateSku] = useMutation(UPDATE_SKU);
 
   const [stockAvailable = stock, setStockAvailable] = useState(stock);
+  const [salePriceVal = salePrice, setSalePriceVal] = useState(salePrice);
+  const [promoPrice = promotionalPrice, setPromoPrice] = useState(
+    promotionalPrice,
+  );
+  const [weight = dimensions.weight, setWeight] = useState(dimensions.weight);
+  const [height = dimensions.height, setHeight] = useState(dimensions.height);
+  const [width = dimensions.width, setWidth] = useState(dimensions.width);
+  const [depth = dimensions.depth, setDepth] = useState(dimensions.depth);
+
   const increaseStock = () =>
     setStockAvailable((prevStockAvailable) => prevStockAvailable + 1);
   const decreaseStock = () => {
@@ -66,25 +90,26 @@ export default function Details({
       prevStockAvailable > 0 ? prevStockAvailable - 1 : prevStockAvailable,
     );
   };
-  const [salePriceVal = salePrice, setSalePriceVal] = React.useState(salePrice);
-  const [promoPrice = promotionalPrice, setPromoPrice] = React.useState(
-    promotionalPrice,
-  );
-  const [weight = dimensions.weight, setWeight] = React.useState(
-    dimensions.weight,
-  );
-  const [height = dimensions.height, setHeight] = React.useState(
-    dimensions.height,
-  );
-  const [width = dimensions.width, setWidth] = React.useState(dimensions.width);
-  const [depth = dimensions.depth, setDepth] = React.useState(dimensions.depth);
 
   const handleEdit = () => {
-    updateSku({variables: {id: id, stock: stockAvailable}});
+    updateSku({
+      variables: {
+        id: id,
+        stock: stockAvailable,
+        salePrice: unformatPrice(salePriceVal),
+        promotionalPrice: unformatPrice(promoPrice),
+        dimensions: {
+          weight: String(weight),
+          height,
+          width,
+          depth,
+        },
+      },
+    });
 
     Alert.alert(
       'Salvas',
-      `Stock ${stockAvailable} - Sale ${salePriceVal} - Promo ${promoPrice} - Weight ${weight} - Width ${width} - Depth: ${depth}`,
+      `Stock ${stockAvailable} - Sale ${salePriceVal} - Promo ${promoPrice} -Height ${height} Weight ${weight} - Width ${width} - Depth: ${depth}`,
     );
   };
 
