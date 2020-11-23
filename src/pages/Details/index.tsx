@@ -33,43 +33,86 @@ import {
 } from './styles';
 import formatWeight from '../../utils/formatWeight';
 import {Alert} from 'react-native';
+import unformatPrice from '../../utils/unformatPrice';
 
 const UPDATE_SKU = gql`
-  mutation UpdateSku(
-    $id: Number!
-    $salePrice: String!
-    $promotionalPrice: String!
+  mutation updateSku(
+    $id: ID!
+    $salePrice: String
+    $promotionalPrice: String
+    $dimensions: JSON
+    $stock: Int
   ) {
     updateSku(
       id: $id
+      stock: $stock
       salePrice: $salePrice
       promotionalPrice: $promotionalPrice
+      package: $dimensions
     ) {
       id
+      stock
       salePrice
       promotionalPrice
+      package
     }
   }
 `;
 
 export default function Details({
   route: {
-    params: {name, imageUrl, salePrice, promotionalPrice, dimensions, stock},
+    params: {
+      id,
+      name,
+      imageUrl,
+      salePrice,
+      promotionalPrice,
+      dimensions,
+      stock,
+    },
   },
-}: RoutesDataProps) {
-  const [updateSku, {data}] = useMutation(UPDATE_SKU);
-
-  const handleEdit = () => {
-    Alert.alert('Salvas', 'Suas alterações foram salvas.');
-  };
+}: RoutesDataProps | any) {
+  const [updateSku] = useMutation(UPDATE_SKU);
 
   const [stockAvailable = stock, setStockAvailable] = useState(stock);
+  const [salePriceVal = salePrice, setSalePriceVal] = useState(salePrice);
+  const [promoPrice = promotionalPrice, setPromoPrice] = useState(
+    promotionalPrice,
+  );
+  const [weight = dimensions.weight, setWeight] = useState(dimensions.weight);
+  const [height = dimensions.height, setHeight] = useState(dimensions.height);
+  const [width = dimensions.width, setWidth] = useState(dimensions.width);
+  const [depth = dimensions.depth, setDepth] = useState(dimensions.depth);
+
   const increaseStock = () =>
     setStockAvailable((prevStockAvailable) => prevStockAvailable + 1);
-  const decreaseStock = () =>
+  const decreaseStock = () => {
     setStockAvailable((prevStockAvailable) =>
       prevStockAvailable > 0 ? prevStockAvailable - 1 : prevStockAvailable,
     );
+  };
+
+  const handleEdit = () => {
+    updateSku({
+      variables: {
+        id: id,
+        stock: stockAvailable,
+        salePrice: unformatPrice(salePriceVal),
+        promotionalPrice: unformatPrice(promoPrice),
+        dimensions: {
+          weight: Number(weight),
+          height,
+          width,
+          depth,
+        },
+      },
+    });
+
+    Alert.alert(
+      'Salvas',
+      `Stock ${stockAvailable} - Sale ${salePriceVal} - Promo ${promoPrice} -Height ${height} Weight ${weight} - Width ${width} - Depth: ${depth}`,
+    );
+  };
 
   return (
     <Wrapper>
@@ -87,9 +130,12 @@ export default function Details({
         <Stock>
           <StockTitle>Estoque:</StockTitle>
           <StockContainer>
-            <StockInput placeholder={'0'} keyboardType={'number-pad'}>
-              {`${stockAvailable}`}
-            </StockInput>
+            <StockInput
+              placeholder={'0'}
+              keyboardType={'number-pad'}
+              defaultValue={`${stockAvailable}`}
+              onChangeText={setStockAvailable}
+            />
 
             <StockButton
               onPress={decreaseStock}
@@ -106,52 +152,70 @@ export default function Details({
         <Prices>
           <PriceContainer>
             <PriceTitle>Preço de venda</PriceTitle>
-            <PriceInput keyboardType="numeric" placeholder={'R$ 0,00'}>
-              {formatPrice(salePrice)}
-            </PriceInput>
+            <PriceInput
+              keyboardType="numeric"
+              placeholder={'R$ 0,00'}
+              defaultValue={`${formatPrice(salePriceVal)}`}
+              onChangeText={setSalePriceVal}
+            />
           </PriceContainer>
 
           <PriceContainer>
             <PriceTitle>Preço promocional</PriceTitle>
-            <PriceInput keyboardType="numeric" placeholder={'R$ 0,00'}>
-              {formatPrice(promotionalPrice)}
-            </PriceInput>
+            <PriceInput
+              keyboardType="numeric"
+              placeholder={'R$ 0,00'}
+              defaultValue={`${formatPrice(promoPrice)}`}
+              onChangeText={setPromoPrice}
+            />
           </PriceContainer>
         </Prices>
 
         <Measures>
           <MeasureContainer>
             <MeasureTitle>Peso</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'1000'}>
-              {formatWeight(dimensions.weight)}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'1000'}
+              defaultValue={`${formatWeight(weight)}`}
+              onChangeText={setWeight}
+            />
             <MeasureUnity> kg</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Altura</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'100'}>
-              {dimensions.height}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'100'}
+              defaultValue={`${height}`}
+              onChangeText={setHeight}
+            />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Largura</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'100'}>
-              {dimensions.width}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'100'}
+              defaultValue={`${width}`}
+              onChangeText={setWidth}
+            />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
           <Divider />
 
           <MeasureContainer>
             <MeasureTitle>Profundidade</MeasureTitle>
-            <MeasureInput keyboardType="numeric" placeholder={'100'}>
-              {dimensions.depth}
-            </MeasureInput>
+            <MeasureInput
+              keyboardType="numeric"
+              placeholder={'100'}
+              defaultValue={`${depth}`}
+              onChangeText={setDepth}
+            />
             <MeasureUnity>cm</MeasureUnity>
           </MeasureContainer>
         </Measures>

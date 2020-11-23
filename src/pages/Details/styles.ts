@@ -50,7 +50,7 @@ export const StockInput = styled.TextInput`
   height: 36px;
   width: 92px;
   border-radius: 3px;
-  padding-left: 13px;
+  padding: 0 13px;
 `;
 
 export const StockButton = styled.TouchableOpacity`
@@ -85,8 +85,10 @@ export const PriceInput = styled.TextInput`
   border-color: #c4cdd5;
   border-width: 1px;
   width: 100%;
-  padding-left: 13px;
+  padding: 0 13px;
   height: 36px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Measures = styled.View`
@@ -111,7 +113,7 @@ export const MeasureTitle = styled.Text`
   font-size: 16px;
 `;
 
-export const MeasureInput = styled.TextInput`
+export const MeasureInput = styled.TextInput.attrs({maxLength: 5})`
   margin-left: auto;
   font-family: 'Rubik-Regular';
   font-size: 15px;
