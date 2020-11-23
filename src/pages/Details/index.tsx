@@ -53,6 +53,7 @@ const UPDATE_SKU = gql`
       id
       stock
       salePrice
+      promotionalPrice
       package
     }
   }
@@ -99,7 +100,7 @@ export default function Details({
         salePrice: unformatPrice(salePriceVal),
         promotionalPrice: unformatPrice(promoPrice),
         dimensions: {
-          weight: String(weight),
+          weight: Number(weight),
           height,
           width,
           depth,

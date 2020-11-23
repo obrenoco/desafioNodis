@@ -113,7 +113,7 @@ export const MeasureTitle = styled.Text`
   font-size: 16px;
 `;
 
-export const MeasureInput = styled.TextInput`
+export const MeasureInput = styled.TextInput.attrs({maxLength: 5})`
   margin-left: auto;
   font-family: 'Rubik-Regular';
   font-size: 15px;
